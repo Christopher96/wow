@@ -1,0 +1,8 @@
+## Interface: 40000
+## Title: FullScreenToogle
+## Notes: Toggles between Windowed and Full Screen modes
+## LoadOnDemand: 0
+## Version: 1.3
+## Author: Seyss [Korgath]
+## URL: http://www.wowinterface.com/downloads/info12833-FullscreenToogle.html
+FullScreenToogle.lua
