@@ -1,5 +1,0 @@
-## Interface: 11200
-## Title: Improved Ignore
-## Notes: Improved functionality for ignore.
-## SavedVariables: ImprovedIgnore_Settings
-ImprovedIgnore.xml

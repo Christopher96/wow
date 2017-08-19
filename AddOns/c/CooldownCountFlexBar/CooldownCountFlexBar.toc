@@ -1,6 +1,0 @@
-## Interface: 11000
-## Title: CooldownCount (FlexBar)
-## Notes: CooldownCount for FlexBar
-## Author: sarf
-## RequiredDeps: FlexBar, CooldownCount
-CooldownCountFlexBar.xml

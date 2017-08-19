@@ -1,1 +1,0 @@
-This addon adds extra features to TinyTip, and will only load if you enable those features.

@@ -1,3 +1,0 @@
-<Bindings>
-	<Binding name="BGASSIST_TOGGLE" header="BGASSIST_SEP"> BGAssist_ToggleWindow(); </Binding>
-</Bindings>

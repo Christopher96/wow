@@ -1,7 +1,0 @@
-## Interface: 11200
-## Author: arJUna
-## Title: simpleMinimap
-## Notes: move and scale the minimap, drag and hide default minimap buttons.
-## SavedVariables: smmConf
-simpleMinimap.xml
-

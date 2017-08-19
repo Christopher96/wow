@@ -1,9 +1,0 @@
-## Interface: 11200
-## Title: ntmys FixLoadingTimes
-## Notes: Improves loading-times when switching zones
-## Author: dantmy@gmx.net
-## SavedVariables: ntmysFLT_isActive
-## Version: 13/apr/2006
-ntmysFixLoadingTimes.xml
-
-

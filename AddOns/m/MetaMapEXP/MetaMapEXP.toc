@@ -1,8 +1,0 @@
-## Interface: 11200
-## Title: MetaMapEXP
-## Author: MetaHawk
-## Notes: MetaMap export module.
-## Dependencies: MetaMap
-## LoadOnDemand: 1
-## SavedVariables: MyKB_Data, MyNotes_Data, MyLines_Data
-MetaMapEXP.xml

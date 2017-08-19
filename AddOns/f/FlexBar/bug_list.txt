@@ -1,2 +1,0 @@
-3. 	Spell cooldowns can mysteriously dissappear until the button is hidden/reshown. 
-

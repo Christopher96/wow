@@ -1,7 +1,0 @@
-## Interface: 11100
-## Title: Minesweeper |cff3fcf26[MiniGamesPack]|r
-
-## Author: Jacob Bowers
-## Notes: 
-## SavedVariables: MinesweeperOptions
-Minesweeper.xml

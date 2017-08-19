@@ -1,8 +1,0 @@
-## Interface: 1600
-## Title: Titan Panel [Friends]
-## Notes: A simple friends list for the Titan Panel AddOn.
-## Author: Kragus | Windrunner
-## SavedVariables: 
-## OptionalDeps: 
-## Dependencies: Titan
-TitanFriends.xml

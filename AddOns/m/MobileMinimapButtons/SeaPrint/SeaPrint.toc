@@ -1,5 +1,0 @@
-## Interface: 11000
-## Title: Sea Print
-## Notes: A Mini-Library for standardized print functions.
-## OptionalDeps: Sea, SeaString
-SeaPrint.xml

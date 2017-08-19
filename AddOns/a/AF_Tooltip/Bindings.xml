@@ -1,5 +1,0 @@
-<Bindings>
-	<Binding name="Toggle AF_ToolTip Frame"  runOnUp="false" header="Aqua Fusion Studios">
-		aftt_toggleFrames();
-	</Binding>
-</Bindings>

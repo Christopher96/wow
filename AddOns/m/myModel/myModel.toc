@@ -1,8 +1,0 @@
-## Interface: 11000
-## Title: |cFF006699UUI -|r myModel
-## Version: 1.0
-## Notes: Just a little dragable frame of your model.
-## OptionalDeps: 
-## Dependencies: 
-## SavedVariables: 
-myModel.xml
