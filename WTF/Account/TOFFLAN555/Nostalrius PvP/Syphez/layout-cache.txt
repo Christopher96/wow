@@ -1,0 +1,14 @@
+Frame: ChatFrame2
+FrameLevel: 4
+X: 32
+Y: -521
+W: 430
+H: 120
+Frame: ItemRefTooltip
+FrameLevel: 5
+X: 433
+Y: -601
+Frame: TutorialFrame
+FrameLevel: 0
+X: 568
+Y: -644

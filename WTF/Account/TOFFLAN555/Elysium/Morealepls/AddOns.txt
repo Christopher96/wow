@@ -1,0 +1,7 @@
+ACP: disabled
+Auctioneer: disabled
+TomTom: disabled
+KC_Items: disabled
+cooldowns: disabled
+Coordinates: disabled
+simpleMinimap: disabled

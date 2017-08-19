@@ -1,0 +1,231 @@
+
+QuestieSeenQuests = {
+	[1269184218] = 1,
+	[71545282] = 0,
+	[1215733186] = 1,
+	[2044731818] = 1,
+	[3493398616] = 0,
+	[236395010] = 0,
+	[2609917898] = 0,
+	[1496872338] = 0,
+	[1062068898] = 1,
+	[1487048778] = 0,
+	[405676786] = 0,
+	[3541494730] = 1,
+	[2699928498] = 0,
+	[3378726874] = 0,
+	[3233580066] = 0,
+	[2261623074] = 1,
+	[3154992778] = 1,
+}
+QuestieTrackedQuests = {
+	[71545282] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Sapphire of Aku'Mai: 0/20",
+		},
+		["leaderboards"] = 1,
+		["questName"] = "The Essence of Aku'Mai",
+		["level"] = 22,
+		["tracked"] = false,
+		["questTag"] = "Dungeon",
+	},
+	[405676786] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "monster",
+			["desc"] = "Dun Garok Mountaineer slain: 0/8",
+		},
+		["tracked"] = false,
+		["objective3"] = {
+			["notes"] = {
+			},
+			["type"] = "monster",
+			["desc"] = "Dun Garok Priest slain: 0/2",
+		},
+		["objective2"] = {
+			["notes"] = {
+			},
+			["type"] = "monster",
+			["desc"] = "Dun Garok Rifleman slain: 0/4",
+		},
+		["objective4"] = {
+			["notes"] = {
+			},
+			["type"] = "monster",
+			["desc"] = "Captain Ironhill slain: 0/1",
+		},
+		["questName"] = "Battle of Hillsbrad",
+		["questTag"] = "Elite",
+		["leaderboards"] = 4,
+		["level"] = 30,
+	},
+	[3233580066] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Steelsnap's Rib: 0/1",
+		},
+		["leaderboards"] = 1,
+		["questName"] = "Steelsnap",
+		["level"] = 30,
+		["tracked"] = false,
+	},
+	[1496872338] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Head of Kelris: 0/1",
+		},
+		["leaderboards"] = 1,
+		["questName"] = "Blackfathom Villainy",
+		["level"] = 27,
+		["tracked"] = false,
+		["questTag"] = "Dungeon",
+	},
+	[2609917898] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Alien Egg: 0/1",
+		},
+		["leaderboards"] = 1,
+		["questName"] = "Alien Egg",
+		["level"] = 26,
+		["tracked"] = false,
+	},
+	[3493398616] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Blueleaf Tuber: 0/6",
+		},
+		["tracked"] = false,
+		["objective3"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Snufflenose Owner's Manual: 0/1",
+		},
+		["objective2"] = {
+			["type"] = "item",
+			["done"] = 1,
+			["notes"] = {
+			},
+			["desc"] = "Crate With Holes: 1/1",
+		},
+		["objective4"] = {
+			["type"] = "item",
+			["done"] = 1,
+			["notes"] = {
+			},
+			["desc"] = "Snufflenose Command Stick: 1/1",
+		},
+		["questName"] = "Blueleaf Tubers",
+		["questTag"] = "Dungeon",
+		["leaderboards"] = 4,
+		["level"] = 26,
+	},
+	[236395010] = {
+		["objective2"] = {
+			["notes"] = {
+			},
+			["type"] = "monster",
+			["desc"] = "Syndicate Watchman slain: 2/10",
+		},
+		["tracked"] = false,
+		["questName"] = "WANTED: Syndicate Personnel",
+		["level"] = 22,
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "monster",
+			["desc"] = "Syndicate Rogue slain: 0/10",
+		},
+		["leaderboards"] = 2,
+	},
+	[3378726874] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Kraul Guano: 0/1",
+		},
+		["leaderboards"] = 1,
+		["questName"] = "Going, Going, Guano!",
+		["level"] = 33,
+		["tracked"] = false,
+		["questTag"] = "Dungeon",
+	},
+	[2699928498] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Fathom Core: 0/1",
+		},
+		["leaderboards"] = 1,
+		["questName"] = "Amongst the Ruins",
+		["level"] = 27,
+		["tracked"] = false,
+		["questTag"] = "Dungeon",
+	},
+	[1487048778] = {
+		["objective1"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Kenata's Head: 0/1",
+		},
+		["tracked"] = false,
+		["objective2"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Marcel's Head: 0/1",
+		},
+		["questName"] = "To Steal From Thieves",
+		["level"] = 36,
+		["objective3"] = {
+			["notes"] = {
+			},
+			["type"] = "item",
+			["desc"] = "Fardel's Head: 0/1",
+		},
+		["leaderboards"] = 3,
+	},
+}
+QuestieConfig = {
+	["minLevelFilter"] = false,
+	["maxShowLevel"] = 3,
+	["getVersion"] = 3.3,
+	["alwaysShowDistance"] = false,
+	["boldColors"] = false,
+	["arrowEnabled"] = true,
+	["showMapAids"] = true,
+	["trackerEnabled"] = true,
+	["showProfessionQuests"] = false,
+	["minShowLevel"] = 5,
+	["alwaysShowQuests"] = true,
+	["resizeWorldmap"] = false,
+	["alwaysShowLevel"] = true,
+	["showTrackerHeader"] = false,
+	["trackerList"] = false,
+	["maxLevelFilter"] = false,
+}
+QuestieTrackerVariables = {
+	["position"] = {
+		["relativeTo"] = "UIParent",
+		["point"] = "LEFT",
+		["relativePoint"] = "LEFT",
+		["yOfs"] = 0,
+		["xOfs"] = 0,
+	},
+}

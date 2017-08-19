@@ -1,0 +1,14 @@
+Frame: ChatFrame2
+FrameLevel: 4
+X: 32
+Y: -631
+W: 430
+H: 120
+Frame: TutorialFrame
+FrameLevel: 3
+X: 511
+Y: -267
+Frame: MonkeyQuestFrame
+FrameLevel: 1
+X: 40
+Y: -227

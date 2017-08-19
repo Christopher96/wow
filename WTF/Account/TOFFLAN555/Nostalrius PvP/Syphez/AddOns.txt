@@ -1,0 +1,9 @@
+Auctioneer: enabled
+Bagnon: disabled
+KC_Items: disabled
+MonkeyQuest: disabled
+MonkeyLibrary: disabled
+Stubby: enabled
+AtlasQuest: disabled
+Atlas: disabled
+AtlasLoot: disabled

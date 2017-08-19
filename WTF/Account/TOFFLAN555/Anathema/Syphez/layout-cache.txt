@@ -1,0 +1,8 @@
+Frame: MonkeyQuestFrame
+FrameLevel: 6
+X: 1081
+Y: -181
+Frame: OneBagFrame
+FrameLevel: 8
+X: 850
+Y: -343

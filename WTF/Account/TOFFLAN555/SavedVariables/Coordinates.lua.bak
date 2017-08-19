@@ -1,0 +1,2 @@
+
+CoordinatesDB = nil

@@ -1,0 +1,153 @@
+
+QuestieSeenQuests = {
+	[3085470560] = 1,
+	[2728685762] = 1,
+	[1238798378] = 1,
+	[1797931944] = 0,
+	[2183285986] = 1,
+	[3066341194] = 1,
+	[2724480226] = 1,
+	[2397090082] = 1,
+	[667847874] = 1,
+	[3270161338] = 1,
+	[2380928082] = 1,
+	[4152811538] = 1,
+	[3238533930] = 1,
+	[3502155554] = 1,
+	[2534456402] = 0,
+	[1449638066] = 1,
+	[1258277690] = 1,
+	[3767370266] = 0,
+	[611961738] = 1,
+	[3223929162] = 1,
+	[2595004784] = 1,
+	[2289221650] = 1,
+	[1130311002] = 1,
+	[3178331786] = 1,
+	[3223239610] = 1,
+	[3464359170] = 0,
+	[297675714] = 1,
+	[3413367682] = 0,
+	[3843816834] = 1,
+	[2649856472] = 1,
+}
+QuestieTrackedQuests = {
+	[2534456402] = {
+		["tracked"] = false,
+		["questName"] = "Rite of Wisdom",
+		["level"] = 10,
+		["leaderboards"] = 0,
+	},
+	[3767370266] = {
+		["objective1"] = {
+			["type"] = "monster",
+			["notes"] = {
+			},
+			["desc"] = "Ragefire Trogg slain: 0/8",
+		},
+		["leaderboards"] = 2,
+		["objective2"] = {
+			["type"] = "monster",
+			["notes"] = {
+			},
+			["desc"] = "Ragefire Shaman slain: 0/8",
+		},
+		["questName"] = "Testing an Enemy's Strength",
+		["questTag"] = "Dungeon",
+		["level"] = 15,
+		["tracked"] = false,
+	},
+	[1797931944] = {
+		["objective1"] = {
+			["type"] = "item",
+			["done"] = 1,
+			["notes"] = {
+			},
+			["desc"] = "Stalker Claws: 6/6",
+		},
+		["tracked"] = false,
+		["objective2"] = {
+			["type"] = "item",
+			["notes"] = {
+			},
+			["desc"] = "Cougar Claws: 2/6",
+		},
+		["arrowPoint"] = {
+			["hash"] = 1797931944,
+			["c"] = 1,
+			["dist"] = 214.9838490103954,
+			["yDelta"] = -201.6016592951887,
+			["xDelta"] = -74.66475945686268,
+			["y"] = 0.4257,
+			["x"] = 0.3542,
+			["title"] = "|cFFFFFF00[7] Thunderhorn Totem|r",
+			["z"] = 11,
+		},
+		["level"] = 7,
+		["leaderboards"] = 2,
+		["questName"] = "Thunderhorn Totem",
+	},
+	[3413367682] = {
+		["objective1"] = {
+			["type"] = "item",
+			["notes"] = {
+			},
+			["desc"] = "Azure Feather: 0/6",
+		},
+		["tracked"] = false,
+		["objective2"] = {
+			["type"] = "item",
+			["notes"] = {
+			},
+			["desc"] = "Bronze Feather: 1/6",
+		},
+		["arrowPoint"] = {
+			["hash"] = 3413367682,
+			["c"] = 1,
+			["dist"] = 898.9034349206544,
+			["yDelta"] = -839.3366308833234,
+			["xDelta"] = -321.7785035852809,
+			["y"] = 0.2395,
+			["x"] = 0.3061,
+			["title"] = "|cFFFFFF00[11] Preparation for Ceremony|r",
+			["z"] = 11,
+		},
+		["level"] = 11,
+		["leaderboards"] = 2,
+		["questName"] = "Preparation for Ceremony",
+	},
+	[3464359170] = {
+		["leaderboards"] = 0,
+		["questName"] = "Searching for the Lost Satchel",
+		["questTag"] = "Dungeon",
+		["level"] = 16,
+		["tracked"] = false,
+	},
+}
+QuestieConfig = {
+	["minLevelFilter"] = false,
+	["maxShowLevel"] = 3,
+	["getVersion"] = 3.3,
+	["alwaysShowDistance"] = false,
+	["boldColors"] = false,
+	["arrowEnabled"] = true,
+	["showMapAids"] = true,
+	["trackerEnabled"] = true,
+	["showProfessionQuests"] = false,
+	["minShowLevel"] = 5,
+	["alwaysShowQuests"] = true,
+	["resizeWorldmap"] = false,
+	["alwaysShowLevel"] = true,
+	["showTrackerHeader"] = false,
+	["trackerList"] = false,
+	["maxLevelFilter"] = false,
+}
+QuestieTrackerVariables = {
+	["position"] = {
+		["relativeTo"] = "UIParent",
+		["point"] = "LEFT",
+		["relativePoint"] = "LEFT",
+		["yOfs"] = 0,
+		["xOfs"] = 0,
+	},
+}
