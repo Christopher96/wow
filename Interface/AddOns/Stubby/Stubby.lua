@@ -1,153 +1,178 @@
---[[  Stubby
+--[[
+	Stubby AddOn for World of Watcraft (tm)
+	Version: 8.2.6376 (SwimmingSeadragon)
+	Revision: $Id: Stubby.lua 6376 2019-10-20 00:10:07Z none $
+	URL: http://auctioneeraddon.com/dl/Stubby/
 
-$Id: Stubby.lua 941 2006-07-10 17:34:32Z mentalpower $
-Version: 3.8.0 (Kangaroo)
+	Stubby is an addon that allows you to register boot code for
+	your addon.
 
-Stubby is an addon that allows you to register boot code for
-your addon.
+	This bootcode will be run whenever your addon does not demand
+	load on startup so that you can setup your own conditions for
+	loading.
 
-This bootcode will be run whenever your addon does not demand
-load on startup so that you can setup your own conditions for
-loading.
+	A quick example of this is:
+	-------------------------------------------
+		Stubby.RegisterBootCode("myAddOn", "CommandHandler", [=[
+			local function cmdHandler(msg)
+				LoadAddOn("myAddOn")
+				MyAddOn_Command(msg)
+			end
+			SLASH_MYADDON1 = "/myaddon"
+			SlashCmdList['MYADDON'] = cmdHandler
+		]=])
+	-------------------------------------------
+	So, what did this just do? It registered some boot code
+	(called "CommandHandler") with Stubby that Stubby will
+	(in the case you are not demand loaded) execute on your
+	behalf.
 
-A quick example of this is:
--------------------------------------------
-	Stubby.RegisterBootCode("myAddOn", "CommandHandler", [[
-		local function cmdHandler(msg)
-			LoadAddOn("myAddOn")
-			MyAddOn_Command(msg)
-		end
-		SLASH_MYADDON1 = "/myaddon"
-		SlashCmdList['MYADDON'] = cmdHandler
-	]]);
--------------------------------------------
-So, what did this just do? It registered some boot code
-(called "CommandHandler") with Stubby that Stubby will
-(in the case you are not demand loaded) execute on your
-behalf.
+	In the above example, your boot code sets up a command handler
+	which causes your addon to load and process the command.
 
-In the above example, your boot code sets up a command handler
-which causes your addon to load and process the command.
-
-Another example:
--------------------------------------------
-Stubby.CreateAddOnLoadBootCode("myAddOn", "Blizzard_AuctionUI")
--------------------------------------------
-Ok, what was that? Well you just setup some boot code
-for your addon that will register an addon hook when
-Stubby loads and your addon doesn't. This addon hook
-will cause your addon to load when the AuctionUI does.
-
-
-The primary functions that you will be interested in are:
-	CreateAddOnLoadBootCode(ownerAddOn, triggerAddOn)
-	CreateEventLoadBootCode(ownerAddOn, triggerEvent)
-	CreateFunctionLoadBootCode(ownerAddOn, triggerFunction)
-And the manual, but vastly more powerful:
-	RegisterBootCode(ownerAddOn, bootName, bootCode)
+	Another example:
+	-------------------------------------------
+	Stubby.CreateAddOnLoadBootCode("myAddOn", "Blizzard_AuctionUI")
+	-------------------------------------------
+	Ok, what was that? Well you just setup some boot code
+	for your addon that will register an addon hook when
+	Stubby loads and your addon doesn't. This addon hook
+	will cause your addon to load when the AuctionUI does.
 
 
-Stubby can also save variables for you if you wish to retain
-stateful information in your boot code. (maybe you have
-recieved notification from your user that they wish always
-to have your addon load for the current toon?)
-
-These are the variable functions:
-	SetConfig(ownerAddOn, variable, value, isGlobal)
-GetConfig(ownerAddOn, variable)
-	ClearConfig(ownerAddOn, variable)
-
-The SetConfig function sets the configuration variable
-"variable" for ownerAddOn to value. The variable is
-per-toon unless isGlobal is set.
-
-The GetConfig function gets "variable" for ownerAddOn
-it will return per-toon values before global ones.
-
-The ClearConfig function clears the toon specific and
-global "variable" for ownerAddOn.
+	The primary functions that you will be interested in are:
+		CreateAddOnLoadBootCode(ownerAddOn, triggerAddOn)
+		CreateEventLoadBootCode(ownerAddOn, triggerEvent)
+		CreateFunctionLoadBootCode(ownerAddOn, triggerFunction)
+	And the manual, but vastly more powerful:
+		RegisterBootCode(ownerAddOn, bootName, bootCode)
 
 
-The following functions are also available for you to use
-if you need to use some manual boot code and want to
-hook into some function, addon or event within your boot
-code:
-	Stubby.RegisterFunctionHook(triggerFunction, position, hookFunction, ...)
-	Stubby.RegisterAddOnHook(triggerAddOn, ownerAddOn, hookFunction, ...)
-	Stubby.RegisterEventHook(triggerEvent, ownerAddOn, hookFunction, ...)
+	Stubby can also save variables for you if you wish to retain
+	stateful information in your boot code. (maybe you have
+	recieved notification from your user that they wish always
+	to have your addon load for the current toon?)
 
-RegisterFunctionHook allows you to hook into a function.
-* The triggerFunction is a string that names the function you
-	want to hook into. eg: "GameTooltip.SetOwner"
-* The position is a negative or positive number that defines
-	the actual calling order of the addon. The smaller or more
-	negative the number, the earlier in the call sequence your
-	hookFunction will be called, the larger the number, the
-	later your hook will be called. The actual original (hooked)
-	function is called at position 0, so if your addon is hooked
-	at a negative position, you will not have access to any
-	return values.
-* You pass (by reference) your function that you wish called
-	as hookFunction. This function will be called with the
-	following parameters:
-		hookFunction(hookParams, returnValue, hook1, hook2 .. hookN)
+	These are the variable functions:
+		SetConfig(ownerAddOn, variable, value, isGlobal)
+	GetConfig(ownerAddOn, variable)
+		ClearConfig(ownerAddOn, variable)
+
+	The SetConfig function sets the configuration variable
+	"variable" for ownerAddOn to value. The variable is
+	per-toon unless isGlobal is set.
+
+	The GetConfig function gets "variable" for ownerAddOn
+	it will return per-toon values before global ones.
+
+	The ClearConfig function clears the toon specific and
+	global "variable" for ownerAddOn.
+
+
+	The following functions are also available for you to use
+	if you need to use some manual boot code and want to
+	hook into some function, addon or event within your boot
+	code:
+		Stubby.RegisterFunctionHook(triggerFunction, position, hookFunction, ...)
+		Stubby.RegisterAddOnHook(triggerAddOn, ownerAddOn, hookFunction, ...)
+		Stubby.RegisterEventHook(triggerEvent, ownerAddOn, hookFunction, ...)
+
+	RegisterFunctionHook allows you to hook into a function.
+	* The triggerFunction is a string that names the function you
+		want to hook into. eg: "GameTooltip.SetOwner"
+	* The position is a negative or positive number that defines
+		the actual calling order of the addon. The smaller or more
+		negative the number, the earlier in the call sequence your
+		hookFunction will be called, the larger the number, the
+		later your hook will be called. The actual original (hooked)
+		function is called at position 0, so if your addon is hooked
+		at a negative position, you will not have access to any
+		return values.
+	* You pass (by reference) your function that you wish called
+		as hookFunction. This function will be called with the
+		following parameters:
+			hookFunction(hookParams, returnValue, hook1, hook2 .. hookN)
+		- hookParams is a table containing the additional parameters
+		passed to the RegisterFunctionHook function (the "..." params)
+		- returnValue is an array of the returned values of the function
+		or nil if none.
+		- hook1..hookN are the original parameters of the hooked
+		function in the original order.
+	  The passed function can return one of the following three special commands:
+	    - "abort" will abort the function call imidiatly and any hook positioned
+	              after the function won't be called (this includes the original
+	              function, if position of the function retunring "abort" is < 0)
+	    - "killorig" causes the original function tonot being called. All other
+	                 hooked functions will still be called. If position of the
+	                 functions returning "killorig" is > 0, this has no affect
+	                 (since the original function was already called before)
+	    - "setreturn" sets the return value according to the second return value
+	                  which must be a table. All function hooks which are called
+	                  after the function hook which set the return value, will
+	                  receive this new return value as their second parameter. Note
+	                  that the original function still resets the return value. So
+	                  in case you want the complete function hook to return
+	                  something different than the original function's return value,
+	                  make sure to set the position > 0.
+	                  Also note, that any hooked function called after this one can
+	                  change the return value again.
+	                  Examples:
+	                     return "setreturn", {1} sets the return value to 1
+	                     return "setreturn", {} sets the return value to nil
+	                     return "setreturn", {{[1] = "foo", [2] = "bar"}}
+	                        sets the return value to the table:
+	                        {[1] = "foo", [2] = "bar"}
+
+	RegisterAddOnHook is very much like the register function hook
+	call except that there is no positioning (you may get notified in
+	any order with respect to any other addons which may be hooked)
+	* The triggerAddOn specifies the name of the addon of which you
+		want to be notified of it's loading.
+	* The ownerAddOn is your addon's name (used for removing hooks)
+	* The hookFunction is a function that gets called when the
+		triggerAddOn loads or if it is already loaded straight away.
+		This function will be called with the following parameters
+			hookFunction(hookParams)
+		- hookParams is a table containing the additional parameters
+		passed to the RegisterAddOnHook function (the "..." params)
+
+	RegisterEventHook allows you to hook an event in much the same
+	way as the above functions.
+	* The triggerEvent is an event which causes your hookFunction to
+		be executed.
+	* The ownerAddOn is your addon's name (used for removing hooks)
+	* The hookFunction is a function that gets called whenever the
+		triggerEvent fires (until canceled with UnregisterEventHook)
+		This function will be called with the following parameters:
+			hookFunction(hookParams, event, hook1, hook2 .. hookN)
 	- hookParams is a table containing the additional parameters
-	passed to the RegisterFunctionHook function (the "..." params)
-	- returnValue is an array of the returned values of the function
-	or nil if none.
-	- hook1..hookN are the original parameters of the hooked
+	passed to the RegisterEventHook function (the "..." params)
+	- event is the event string that has just been fired
+	- hook1..hookN are the original parameters of the event
 	function in the original order.
 
-RegisterAddOnHook is very much like the register function hook
-call except that there is no positioning (you may get notified in
-any order with respect to any other addons which may be hooked)
-* The triggerAddOn specifies the name of the addon of which you
-	want to be notified of it's loading.
-* The ownerAddOn is your addon's name (used for removing hooks)
-* The hookFunction is a function that gets called when the
-	triggerAddOn loads or if it is already loaded straight away.
-	This function will be called with the following parameters
-		hookFunction(hookParams)
-	- hookParams is a table containing the additional parameters
-	passed to the RegisterAddOnHook function (the "..." params)
+	Other functions which may be of interest are:
+		UnregisterFunctionHook(triggerFunction, hookFunc)
+		UnregisterAddOnHook(triggerAddOn, ownerAddOn)
+		UnregisterEventHook(triggerEvent, ownerAddOn)
+		UnregisterBootCode(ownerAddOn, bootName)
 
-RegisterEventHook allows you to hook an event in much the same
-way as the above functions.
-* The triggerEvent is an event which causes your hookFunction to
-	be executed.
-* The ownerAddOn is your addon's name (used for removing hooks)
-* The hookFunction is a function that gets called whenever the
-	triggerEvent fires (until canceled with UnregisterEventHook)
-	This function will be called with the following parameters:
-		hookFunction(hookParams, event, hook1, hook2 .. hookN)
-- hookParams is a table containing the additional parameters
-passed to the RegisterEventHook function (the "..." params)
-- event is the event string that has just been fired
-- hook1..hookN are the original parameters of the event
-function in the original order.
+	There is also a single exposed 'constant' allowing you to do
+	some basic version checking for compatibility:
+	Stubby.VERSION                (introduced in revision 507)
+	This constant is Stubby's revision number, a simple positive
+	integer that will increase by an arbitrary amount with each
+	new version of Stubby.
+	Current $Rev: 6376 $
 
-Other functions which may be of interest are:
-	UnregisterFunctionHook(triggerFunction, hookFunc)
-	UnregisterAddOnHook(triggerAddOn, ownerAddOn)
-	UnregisterEventHook(triggerEvent, ownerAddOn)
-	UnregisterBootCode(ownerAddOn, bootName)
-
-There is also a single exposed 'constant' allowing you to do
-some basic version checking for compatibility:
-Stubby.VERSION                (introduced in revision 507)
-This constant is Stubby's revision number, a simple positive
-integer that will increase by an arbitrary amount with each
-new version of Stubby.
-Current $Revision: 941 $
-
-Example:
--------------------------------------------
-if (Stubby.VERSION and Stubby.VERSION >= 507) then
-	-- Register boot code
-else
-	Stubby.Print("You need to update your version of Stubby!")
-end
--------------------------------------------
+	Example:
+	-------------------------------------------
+	if (Stubby.VERSION and Stubby.VERSION >= 507) then
+		-- Register boot code
+	else
+		Stubby.Print("You need to update your version of Stubby!")
+	end
+	-------------------------------------------
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -161,9 +186,30 @@ end
 		GNU General Public License for more details.
 
 		You should have received a copy of the GNU General Public License
-		along with this program(see GLP.txt); if not, write to the Free Software
+		along with this program(see GPL.txt); if not, write to the Free Software
 		Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
---]]
+
+	Note:
+		This AddOn's source code is specifically designed to work with
+		World of Warcraft's interpreted AddOn system.
+		You have an implicit license to use this AddOn with these facilities
+		since that is its designated purpose as per:
+		http://www.fsf.org/licensing/licenses/gpl-faq.html#InterpreterIncompat
+]]
+LibStub("LibRevision"):Set("$URL: Stubby/Stubby.lua $","$Rev: 6376 $","5.1.DEV.", 'auctioneer', 'libs')
+
+-------------------------------------------------------------------------------
+-- Error codes
+-------------------------------------------------------------------------------
+-- 0 = no error / function call succeeded
+-- 1 = Trying to remove the hooked function from the trigger function failed
+--     as the hooked function is not hooked in the trigger function at all.
+-- 2 = Trying to remove the hook from a function failed, as the specified is not
+--     hooked at all.
+-- 3 = Trying to remove the hook from a function failed, as another function
+--     meanwhile hooked into the same function.
+-- 4 = Invalid function call. One or more parameters are missing or invalid.
+-- 5 = Failed to compiling a hook.
 
 local cleanList
 local config = {
@@ -173,42 +219,57 @@ local config = {
 	events = {},
 }
 
+local DebugLib = LibStub("DebugLib", true)
+local debug
+local assert = assert -- fallback to standard lua assert function
+if DebugLib then
+	debug, assert = DebugLib("Stubby")
+else
+	function debug() end
+	-- leave assert as it is
+end
+
 StubbyConfig = {}
 
+-- temporary table used in tableRemoveNilSafe() to modify another table
+local tempTable = {}
 
 -- Function prototypes
-local chatPrint						-- chatPrint(...)
-local checkAddOns					-- checkAddOns()
-local clearConfig					-- clearConfig(ownerAddOn, variable)
-local createAddOnLoadBootCode		-- createAddOnLoadBootCode(ownerAddOn, triggerAddOn)
-local createEventLoadBootCode		-- createEventLoadBootCode(ownerAddOn, triggerEvent)
-local createFunctionLoadBootCode	-- createFunctionLoadBootCode(ownerAddOn, triggerFunction)
-local eventWatcher					-- eventWatcher(event)
-local events						-- events(event, param)
-local getConfig						-- getConfig(ownerAddOn, variable)
-local getOrigFunc					-- getOrigFunc(triggerFunction)
-local hookCall						-- hookCall(funcName, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
-local hookInto						-- hookInto(triggerFunction)
-local inspectAddOn					-- inspectAddOn(addonName, title, info)
-local loadWatcher					-- loadWatcher(loadedAddOn)
-local onLoaded						-- onLoaded()
-local onWorldStart					-- onWorldStart()
-local rebuildNotifications			-- rebuildNotifications(notifyItems)
-local registerAddOnHook				-- registerAddOnHook(triggerAddOn, ownerAddOn, hookFunction, ...)
-local registerBootCode				-- registerBootCode(ownerAddOn, bootName, bootCode)
-local registerEventHook				-- registerEventHook(triggerEvent, ownerAddOn, hookFunction, ...)
-local registerFunctionHook			-- registerFunctionHook(triggerFunction, position, hookFunc, ...)
-local runBootCodes					-- runBootCodes()
-local searchForNewAddOns			-- searchForNewAddOns()
-local cleanUpAddOnData				-- cleanUpAddOnData()
-local cleanUpAddOnConfigs			-- cleanUpAddOnConfigs()
-local setConfig						-- setConfig(ownerAddOn, variable, value, isGlobal)
-local shouldInspectAddOn			-- shouldInspectAddOn(addonName)
-local unregisterAddOnHook			-- unregisterAddOnHook(triggerAddOn, ownerAddOn)
-local unregisterBootCode			-- unregisterBootCode(ownerAddOn, bootName)
-local unregisterEventHook			-- unregisterEventHook(triggerEvent, ownerAddOn)
-local unregisterFunctionHook		-- unregisterFunctionHook(triggerFunction, hookFunc)
-
+local chatPrint                  -- chatPrint(...)
+local checkAddOns                -- checkAddOns()
+local clearConfig                -- clearConfig(ownerAddOn, variable)
+local createAddOnLoadBootCode    -- createAddOnLoadBootCode(ownerAddOn, triggerAddOn)
+local createEventLoadBootCode    -- createEventLoadBootCode(ownerAddOn, triggerEvent)
+local createFunctionLoadBootCode -- createFunctionLoadBootCode(ownerAddOn, triggerFunction)
+local errorHandler               -- errorHandler(stackLevel, ...)
+local eventWatcher               -- eventWatcher(event)
+local events                     -- events(event, param)
+local getConfig                  -- getConfig(ownerAddOn, variable)
+local getOrigFunc                -- getOrigFunc(triggerFunction)
+local getRevision                -- getRevision()
+local hookCall                   -- hookCall(funcName, ...)
+local hookInto                   -- hookInto(triggerFunction)
+local inspectAddOn               -- inspectAddOn(addonName, title, info)
+local loadWatcher                -- loadWatcher(loadedAddOn)
+local onLoaded                   -- onLoaded()
+local onWorldStart               -- onWorldStart()
+local rebuildNotifications       -- rebuildNotifications(notifyItems)
+local registerAddOnHook          -- registerAddOnHook(triggerAddOn, ownerAddOn, hookFunction, ...)
+local registerBootCode           -- registerBootCode(ownerAddOn, bootName, bootCode)
+local registerEventHook          -- registerEventHook(triggerEvent, ownerAddOn, hookFunction, ...)
+local registerFunctionHook       -- registerFunctionHook(triggerFunction, position, hookFunc, ...)
+local runBootCodes               -- runBootCodes()
+local searchForNewAddOns         -- searchForNewAddOns()
+local cleanUpAddOnData           -- cleanUpAddOnData()
+local cleanUpAddOnConfigs        -- cleanUpAddOnConfigs()
+local setConfig                  -- setConfig(ownerAddOn, variable, value, isGlobal)
+local shouldInspectAddOn         -- shouldInspectAddOn(addonName)
+local unhookFrom                 -- unhookFrom(triggerFunction)
+local unregisterAddOnHook        -- unregisterAddOnHook(triggerAddOn, ownerAddOn)
+local unregisterBootCode         -- unregisterBootCode(ownerAddOn, bootName)
+local unregisterEventHook        -- unregisterEventHook(triggerEvent, ownerAddOn)
+local unregisterFunctionHook     -- unregisterFunctionHook(triggerFunction, hookFunc)
+local tableRemoveNilSafe         -- tableRemoveNilSafe(table, [pos])
 
 -- Function definitions
 
@@ -216,19 +277,19 @@ local unregisterFunctionHook		-- unregisterFunctionHook(triggerFunction, hookFun
 -- and assigns an actual ordering to them.
 function rebuildNotifications(notifyItems)
 	local notifyFuncs = {}
-	for hookType, hData in notifyItems do
+	for hookType, hData in pairs(notifyItems) do
 		notifyFuncs[hookType] = {}
 
 		-- Sort all hooks for this type in ascending numerical order.
 		local sortedPositions = {}
-		for requestedPos,_ in hData do
+		for requestedPos in pairs(hData) do
 			table.insert(sortedPositions, requestedPos)
 		end
 		table.sort(sortedPositions)
 
 		-- Process the sorted request list and insert in correct
 		-- order into the call list.
-		for _,requestedPos in sortedPositions do
+		for _,requestedPos in ipairs(sortedPositions) do
 			local func = hData[requestedPos]
 			table.insert(notifyFuncs[hookType], func)
 		end
@@ -236,17 +297,39 @@ function rebuildNotifications(notifyItems)
 	return notifyFuncs
 end
 
+local callDetail = {}
+local function callDebugger(...)
+	local msg = tostring(...)
+	for i = 2, select("#", ...) do
+		msg = msg.." "..tostring(select(i, ...))
+	end
+
+	if (Swatter and Swatter.IsEnabled()) then
+		return Swatter.OnError("Error while calling hook:\n{{{Hook name:}}}\n  "..tostring(callDetail[1]).."\n"..msg.."\n{{{Instantiated from:}}}\n  "..callDetail[2].n, StubbyHook, debugstack(2, 20, 20))
+	else
+		return Stubby.Print("Error while calling hook for: "..tostring(callDetail[1])..". "..msg, "\nCall Chain:\n", debugstack(2, 3, 6))
+	end
+end
+
+local function callRunner(...)
+	local funcName, func, retVal, callParams = unpack(callDetail)
+	local callParamsLen = callParams[1]
+	if (funcName) then
+		return func.f(func.a, retVal, unpack(callParams, 2, callParamsLen+1))
+	end
+end
+
+
 -- This function's purpose is to execute all the attached
 -- functions in order and the original call at just before
 -- position 0.
-function hookCall(funcName, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
-	local result, r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20
+function hookCall(funcName, ...)
 	local orig = Stubby.GetOrigFunc(funcName)
 	if (not orig) then return end
 
-	local res;
-	local retVal = nil
-	local returns = false
+	local res
+	local retVal
+	local callParams = { select("#",...), ... }
 
 	local callees
 	if config.calls and config.calls.callList and config.calls.callList[funcName] then
@@ -254,67 +337,168 @@ function hookCall(funcName, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a
 	end
 
 	if (callees) then
-		for _,func in ipairs(callees) do
+		for _, func in ipairs(callees) do
 			if (orig and func.p >= 0) then
-				result, r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20
-					= pcall(orig, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
-				if (result) then
-					if r1 or r2 or r3 or r4 or r5 or r6 or r7 or r8 or r9 or r10 or r11 or r12 or r13 or r14 or r15 or r16 or r17 or r18 or r19 or r20 then
-						retVal = { r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20 }
-						returns = true
+				retVal = {pcall(orig, ...)}
+
+				-- After pcall, the first element in the table is either true, if
+				-- pcall succeeded, or false, if it failed.
+				-- So we remove this result code and check if the call was
+				-- successful. If it wasn't, an errormessage is printed.
+				-- We also have to use a nil-safe variation of table.remove() since
+				-- there are blizard functions which return tables containing
+				-- holes, which are not processed as required by table.remove().
+				if (not tableRemoveNilSafe(retVal, 1)) then
+					local ErrorString = "Error: Original call failed while running hooks: "..tostring(funcName)
+					for key, value in pairs(retVal) do
+						ErrorString = ErrorString.."\n"..tostring(key).." : "..tostring(value)
 					end
-				else
-					Stubby.Print("Error occured while running hooks for: ", tostring(funcName), "\n", r1, "\nCall Chain:\n", debugstack(2, 3, 6))
+					Stubby.ErrorHandler(2, ErrorString)
 				end
 				orig = nil
 			end
-			local result, res, addit = pcall(func.f, func.a, retVal, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20);
+
+			callDetail[1] = funcName
+			callDetail[2] = func
+			callDetail[3] = retVal
+			callDetail[4] = callParams
+			local result, res, addit = xpcall(callRunner, callDebugger)
 			if (result) then
-				if (type(res) == 'string') then
-					if (res == 'abort') then return end
-					if (res == 'killorig') then orig = nil end
-					if (res == 'setreturn') then
-						retVal = addit
-						returns = true
-					end
-					if (res == 'setparams') then
-						a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20 = unpack(addit)
-					end
+				if (res == 'abort') then
+					return
+				elseif (res == 'killorig') then
+					orig = nil
+				elseif (res == 'setreturn') then
+					retVal = addit
+					returns = true
 				end
-			else
-				Stubby.Print("Error occured while running hooks for: ", tostring(funcName), "\n", res, "\nCall Chain:\n", debugstack(2, 3, 6))
 			end
 		end
 	end
+
 	if (orig) then
-		result, r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20
-			= pcall(orig, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
-		if (result) then
-			if r1 or r2 or r3 or r4 or r5 or r6 or r7 or r8 or r9 or r10 or r11 or r12 or r13 or r14 or r15 or r16 or r17 or r18 or r19 or r20 then
-				returns = true
-			end
-		else
-			Stubby.Print("Error occured while running hooks for: ", tostring(funcName), "\n", r1, "\nCall Chain:\n", debugstack(2, 3, 6))
+		retVal = {pcall(orig, ...)}
+		if (not tableRemoveNilSafe(retVal, 1)) then
+			Stubby.ErrorHandler(2, "Error: Original call failed after running hooks for: ", tostring(funcName), "\n", retVal[1])
 		end
 	end
-	if (returns) then
-		return r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20
+
+	if (retVal) then
+		return unpack(retVal, 1, table.maxn(retVal))
 	end
 end
 
+-------------------------------------------------------------------------------
 -- This function automatically hooks Stubby in place of the
 -- original function, dynamically.
+--
+-- returns:
+--    first value:
+--       0 - if hooking into the triggerFunction was successful
+--      >0 - errorcode
+--    second value:
+--       nil      - if hooking into the triggerFunction was successful
+--       (string) - errormessage
+--
+-- remarks:
+--    Refere to the Error codes section to get a list of possible errors.
+-------------------------------------------------------------------------------
 Stubby_OldFunction = nil
 Stubby_NewFunction = nil
 function hookInto(triggerFunction)
-	if (config.hooks.origFuncs[triggerFunction]) then return end
-	RunScript("Stubby_OldFunction = "..triggerFunction)
-	RunScript("Stubby_NewFunction = function(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20) return Stubby.HookCall('"..triggerFunction.."', a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20) end")
-	RunScript(triggerFunction.." = Stubby_NewFunction")
-	config.hooks.functions[triggerFunction] = Stubby_NewFunction;
-	config.hooks.origFuncs[triggerFunction] = Stubby_OldFunction;
+	assert(triggerFunction, "No trigger function specified when calling hookInto!")
+
+	if config.hooks.origFuncs[triggerFunction] then
+		-- Stubby is already hooked into this function. No need to do it again.
+		return 0
+	end
+	local stringToLoad = [[
+		Stubby_OldFunction = ]]..triggerFunction..[[;
+		local functionString = ']]..triggerFunction..[[';
+
+		if (not (type(Stubby_OldFunction) == "function")) then
+			return Stubby.ErrorHandler(3, "Error occured while compiling hook: ", tostring(functionString), "is not a valid function")
+		end
+
+		Stubby_NewFunction = function(...)
+			return Stubby.HookCall(functionString, ...);
+		end;
+		]]..triggerFunction..[[ = Stubby_NewFunction
+	]];
+	local loadedFunction, errorMessage = loadstring(stringToLoad, "StubbyHookingFunction")
+
+	if (loadedFunction) then
+		loadedFunction()
+	else
+		Stubby_NewFunction = nil
+		Stubby_OldFunction = nil
+
+		Stubby.ErrorHandler(2, "Error occured while compiling hook:", tostring(triggerFunction), "\n", errorMessage)
+		return 5, "Error occured while compiling hook for "..triggerFunction..". Errormessage: "..errorMessage
+	end
+
+	config.hooks.functions[triggerFunction] = Stubby_NewFunction
+	config.hooks.origFuncs[triggerFunction] = Stubby_OldFunction
+
 	Stubby_NewFunction = nil
 	Stubby_OldFunction = nil
+
+	return 0
+end
+
+-------------------------------------------------------------------------------
+-- Unhooks stubby's hooked function from the given trigger function.
+--
+-- calls:
+--    getglobal()  - if there is a hooked function present
+--
+-- called by:
+--    TODO
+--
+-- paramaeters:
+--    triggerFunction - (string) the name of the function to be unhooked
+--
+-- returns:
+--    first value:
+--       0 - if unhooking was successful
+--      >0 - errorcode
+--    second value:
+--       nil      - if unhooking was successful
+--       (string) - errormessage
+--
+-- remarks:
+--    Refere to the Error codes section to get a list of possible errors.
+-------------------------------------------------------------------------------
+function unhookFrom(triggerFunction)
+	-- check, if the trigger function is really hooked
+	if not config.hooks.origFuncs[triggerFunction] then
+		return 2, "Failed to unhook the trigger function: "..triggerFunction.." since it is not hooked at all."
+	end
+
+	-- make sure, that no other addon hooked this function meanwhile
+	if _G[triggerFunction] == config.hooks.origFuncs[triggerFunction] then
+		triggerFunction = config.hooks.origFuncs[triggerFunction]
+		config.hooks.origFuncs[triggerFunction] = nil
+		config.hooks.functions[triggerFunction] = nil
+		return 0
+	end
+
+	return 3, "Could not unhook the trigger function "..triggerFunction..", since another addon hooked it meanwhile."
+end
+
+function errorHandler(stackLevel, ...)
+	local msg = tostring(...)
+	for i = 2, select("#", ...) do
+		msg = msg.." "..tostring(select(i, ...))
+	end
+
+	stackLevel = (stackLevel or 1) + 1
+
+	if (Swatter and Swatter.IsEnabled()) then
+		return Swatter.OnError(msg, Stubby, debugstack(stackLevel, 20, 20))
+	else
+		return Stubby.Print(msg, "\nCall Chain:\n", debugstack(2, 3, 6))
+	end
 end
 
 function getOrigFunc(triggerFunction)
@@ -323,20 +507,48 @@ function getOrigFunc(triggerFunction)
 	end
 end
 
-
--- This function causes a given function to be hooked by stubby and
--- configures the hook function to be called at the given position.
--- The original function gets executed a position 0. Use a negative
--- number to get called before the original function, and positive
--- number to get called after the original function. Default position
--- is 200. If someone else is already using your number, you will get
--- automatically moved up for after or down for before. Please also
--- leave space for other people who may need to position their hooks
--- in between your hook and the original.
+-------------------------------------------------------------------------------
+--[[
+	This function causes a given function to be hooked by stubby and configures the hook function to be called at the given position.
+	The original function gets executed a position 0. Use a negative number to get called before the original function, and positive
+	number to get called after the original function. Default position is 200. If someone else is already using your number, you will get
+	automatically moved up for after or down for before. Please also leave space for other people who may need to position their hooks
+	in between your hook and the original.
+ ]]
+-- returns:
+--    first value:
+--       0 - if registering the function hook was successful
+--      >0 - errorcode
+--    second value:
+--       nil      - if registering the function hook was successful
+--       (string) - errormessage
+--
+-- remarks:
+--    Refere to the Error codes section to get a list of possible errors.
+-------------------------------------------------------------------------------
 function registerFunctionHook(triggerFunction, position, hookFunc, ...)
+	if (not (triggerFunction and hookFunc)) then
+		return debug("Invalid function call. No trigger function and/or hook function specified. Usage Stubby.RegisterFunctionHook(triggerFunction, position, hookFunction,...).",
+								4, DebugLib.Level.Error)
+	end
+
 	local insertPos = tonumber(position) or 200
-	local funcObj = { f=hookFunc, a=arg, p=position }
-	if (table.getn(arg) == 0) then funcObj.a = nil; end
+	local funcObj
+	local hookFuncName = strsplit("\n", debugstack(2,1,0), 2)
+	if (select("#", ...) == 0) then
+		funcObj = {
+			f = hookFunc,
+			n = hookFuncName,
+			p = position,
+		}
+	else
+		funcObj = {
+			f = hookFunc,
+			n = hookFuncName,
+			a = {...},
+			p = position
+		}
+	end
 
 	if (not config.calls) then config.calls = {} end
 	if (not config.calls.functions) then config.calls.functions = {} end
@@ -353,49 +565,128 @@ function registerFunctionHook(triggerFunction, position, hookFunc, ...)
 		config.calls.functions[triggerFunction] = {}
 		config.calls.functions[triggerFunction][insertPos] = funcObj
 	end
-	config.calls.callList = rebuildNotifications(config.calls.functions);
-	hookInto(triggerFunction)
-end
-
-function unregisterFunctionHook(triggerFunction, hookFunc)
-	if not (config.calls and config.calls.functions and config.calls.functions[triggerFunction]) then return end
-	for pos, funcObj in config.calls.functions[triggerFunction] do
-		if (funcObj and funcObj.f == hookFunc) then
-			config.calls.functions[triggerFunction][pos] = nil
-		end
+	config.calls.callList = rebuildNotifications(config.calls.functions)
+	local iErrorCode, strErrorMessage = hookInto(triggerFunction)
+	if iErrorCode > 0 then
+		return debug(strErrorMessage, iErrorCode, DebugLib.Level.Error)
+	else
+		return 0
 	end
 end
 
--- This function registers a given function to be called when a given
--- addon is loaded, or immediatly if it is already loaded (this can be
--- used to setup a hooking function to execute when an addon is loaded
--- but not before)
+-------------------------------------------------------------------------------
+-- Unregisters the hooked function. If the hooked function is hooked multiple
+-- times, all these hooks are removed.
+--
+-- calls:
+--    unhookFrom()          - if unregistering the last hooked function
+--    rebuildNotification() - always
+--
+-- called by:
+--    TODO
+--
+-- paramaeters:
+--    TODO
+--
+-- returns:
+--    first value:
+--       >0 - number of how many times the given hooked function has been
+--            unhooked
+--        0 - indicates an error
+--    second value:
+--       0 - if unhooking was successful
+--      >0 - errorcode
+--    third value:
+--       nil      - if unhooking was successful
+--       (string) - errormessage
+--
+-- remarks:
+--    Refere to the Error codes section to get a list of possible errors.
+-------------------------------------------------------------------------------
+function unregisterFunctionHook(triggerFunction, hookFunc)
+	if not (config.calls and config.calls.functions and config.calls.functions[triggerFunction]) then
+		return 0, debug("Failed to unregister function hook for "..triggerFunction.." since it is not hooked at all",
+		                     1, DebugLib.Level.Error)
+	end
+
+	local iHooked  = 0
+	local iRemoved = 0
+	for pos, funcObj in pairs(config.calls.functions[triggerFunction]) do
+		iHooked = iHooked + 1
+		if (funcObj and funcObj.f == hookFunc) then
+			config.calls.functions[triggerFunction][pos] = nil
+			iRemoved = iRemoved + 1
+		end
+	end
+
+	-- config.calls.functions[triggerFunction] should never be empty. If there
+	-- are no hooked functions, it should be nil!
+	-- Otherwise this could produce incorrect error messages.
+	assert(iHooked > 0, "config.calls.functions["..triggerFunction.."] is an empty array!")
+
+	-- clean up the hooking tables, if no more hooked functions are present
+	if(iHooked == iRemoved) then
+		config.calls.functions[triggerFunction] = nil
+		-- make sure that unhooking was sucessful, or could not be done due to another addon hooking the trigger function meanwhile
+		-- TODO: add something like if canBeUnhooked(triggerFunction) then to disable false error messages
+		assert(unhookFrom(triggerFunction) ~= 2, "unhookFrom() reports the trigger function: "..triggerFunction.." not to be hooked, although it should be!")
+	end
+
+	if iRemoved == 0 then
+		return 0, debug("Failed to unregister function hook for "..triggerFunction..". The given function is not hooked in this trigger function.",
+		                     1, DebugLib.Level.Error)
+	end
+
+	-- rebuild the call list, so that the removed functions are also removed from
+	-- the call list
+	config.calls.callList = rebuildNotifications(config.calls.functions)
+
+	return iRemoved, 0
+end
+
+--[[
+	This function registers a given function to be called when a given addon is loaded, or immediatly if it is already loaded (this can be
+	used to setup a hooking function to execute when an addon is loaded but not before)
+	In certain cenarios IsAddOnLoaded returns 1 even though addon is not fully loaded yet. See http://jira.norganna.org/browse/STUB-8
+	for details. In these cases the hook function will be called twice. It should check by querting a global variable form the addon
+	if the addon was actually loaded, before accessing its functionality
+ ]]
 function registerAddOnHook(triggerAddOn, ownerAddOn, hookFunction, ...)
 	if (IsAddOnLoaded(triggerAddOn)) then
-		hookFunction(unpack(arg))
-	else
-		local addon = string.lower(triggerAddOn)
-		if (not config.loads[addon]) then config.loads[addon] = {} end
-		config.loads[addon][ownerAddOn] = nil
-		if (hookFunction) then
-			config.loads[addon][ownerAddOn] = { f=hookFunction, a=arg }
+		if (select("#", ...) == 0) then
+			hookFunction()
+		else
+			hookFunction({...})
+		end
+	end
+	local addon = triggerAddOn:lower()
+	if (not config.loads[addon]) then config.loads[addon] = {} end
+	config.loads[addon][ownerAddOn] = nil
+	if (hookFunction) then
+		if (select("#", ...) == 0) then
+			config.loads[addon][ownerAddOn] = {
+				f = hookFunction,
+			}
+		else
+			config.loads[addon][ownerAddOn] = {
+				f = hookFunction,
+				a = {...},
+			}
 		end
 	end
 end
 
 function unregisterAddOnHook(triggerAddOn, ownerAddOn)
-	local addon = string.lower(triggerAddOn)
+	local addon = triggerAddOn:lower()
 	if (config.loads and config.loads[addon] and config.loads[addon][ownerAddOn]) then
 		config.loads[addon][ownerAddOn] = nil
 	end
 end
 
-
 function loadWatcher(loadedAddOn)
-	local addon = string.lower(loadedAddOn)
+	local addon = loadedAddOn:lower()
 	if (config.loads[addon]) then
-		local ownerAddOn, hookDetail
-		for ownerAddOn, hookDetail in config.loads[addon] do
+		for ownerAddOn, hookDetail in pairs(config.loads[addon]) do
 			hookDetail.f(hookDetail.a)
 		end
 	end
@@ -411,21 +702,40 @@ function registerEventHook(triggerEvent, ownerAddOn, hookFunction, ...)
 	end
 	config.events[triggerEvent][ownerAddOn] = nil
 	if (hookFunction) then
-		config.events[triggerEvent][ownerAddOn] = { f=hookFunction, a=arg }
+		if (select("#", ...) == 0) then
+			config.events[triggerEvent][ownerAddOn] = {
+				f = hookFunction,
+			}
+		else
+			config.events[triggerEvent][ownerAddOn] = {
+				f = hookFunction,
+				a = {...},
+			}
+		end
 	end
 end
 
 function unregisterEventHook(triggerEvent, ownerAddOn)
 	if (config.events and config.events[triggerEvent] and config.events[triggerEvent][ownerAddOn]) then
 		config.events[triggerEvent][ownerAddOn] = nil
+
+		-- events is indexed using the addons name as the key value,
+		-- so we have to use next() to check, if the table is empty
+		-- Debugged by ccox and Cera
+		if ( not next( config.events[triggerEvent] ) ) then
+			config.events[triggerEvent] = nil
+			-- Never unregister ADDON_LOADED, because this is used by RegisterAddOnHook()
+			if (triggerEvent ~= "ADDON_LOADED") then
+				StubbyFrame:UnregisterEvent(triggerEvent)
+			end
+		end
 	end
 end
 
-function eventWatcher(event)
+function eventWatcher(event, ...)
 	if (config.events[event]) then
-		local ownerAddOn, hookDetail
-		for ownerAddOn, hookDetail in config.events[event] do
-			hookDetail.f(hookDetail.a, event, arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,arg15,arg16,arg17,arg18,arg19,arg20);
+		for ownerAddOn, hookDetail in pairs(config.events[event]) do
+			hookDetail.f(hookDetail.a, event, ...)
 		end
 	end
 end
@@ -437,8 +747,8 @@ end
 -- command handler, hook into functions, load your addon etc.
 -- Leaving bootCode nil will remove your boot.
 function registerBootCode(ownerAddOn, bootName, bootCode)
-	local ownerIndex = string.lower(ownerAddOn)
-	local bootIndex = string.lower(bootName)
+	local ownerIndex = ownerAddOn:lower()
+	local bootIndex = bootName:lower()
 	if (not StubbyConfig.boots) then StubbyConfig.boots = {} end
 	if (not StubbyConfig.boots[ownerIndex]) then StubbyConfig.boots[ownerIndex] = {} end
 	StubbyConfig.boots[ownerIndex][bootIndex] = nil
@@ -448,8 +758,8 @@ function registerBootCode(ownerAddOn, bootName, bootCode)
 end
 
 function unregisterBootCode(ownerAddOn, bootName)
-	local ownerIndex = string.lower(ownerAddOn)
-	local bootIndex = string.lower(bootName)
+	local ownerIndex = ownerAddOn:lower()
+	local bootIndex = bootName:lower()
 	if not (StubbyConfig.boots) then return end
 	if not (ownerIndex and StubbyConfig.boots[ownerIndex]) then return end
 	if (bootIndex == nil) then
@@ -466,7 +776,7 @@ function createAddOnLoadBootCode(ownerAddOn, triggerAddOn)
 			'Stubby.UnregisterAddOnHook("'..triggerAddOn..'", "'..ownerAddOn..'") '..
 		'end '..
 		'Stubby.RegisterAddOnHook("'..triggerAddOn..'", "'..ownerAddOn..'", hookFunction)'
-	);
+	)
 end
 
 function createFunctionLoadBootCode(ownerAddOn, triggerFunction)
@@ -476,7 +786,7 @@ function createFunctionLoadBootCode(ownerAddOn, triggerFunction)
 			'Stubby.UnregisterFunctionHook("'..triggerFunction..'", hookFunction) '..
 		'end '..
 		'Stubby.RegisterFunctionHook("'..triggerFunction..'", 200, hookFunction)'
-	);
+	)
 end
 
 function createEventLoadBootCode(ownerAddOn, triggerEvent)
@@ -486,7 +796,7 @@ function createEventLoadBootCode(ownerAddOn, triggerEvent)
 			'Stubby.UnregisterEventHook("'..triggerEvent..'", "'..ownerAddOn..'") '..
 		'end '..
 		'Stubby.RegisterEventHook("'..triggerEvent..'", "'..ownerAddOn..'", hookFunction)'
-	);
+	)
 end
 
 -- Functions to check through all addons for dependants.
@@ -506,7 +816,7 @@ function checkAddOns()
 			end
 		end
 	end
-	for name,_ in StubbyConfig.inspected do
+	for name in pairs(StubbyConfig.inspected) do
 		if (not goodList[name]) then
 			StubbyConfig.inspected[name] = nil
 			StubbyConfig.addinfo[name] = nil
@@ -517,7 +827,7 @@ end
 -- Cleans up boot codes for removed addons and prompts for deletion of their
 -- configurations.
 function cleanUpAddOnData()
-	if (not StubbyConfig.boots) then return; end
+	if (not StubbyConfig.boots) then return end
 
 	for b in pairs(StubbyConfig.boots) do
 		local _,title = GetAddOnInfo(b)
@@ -525,21 +835,21 @@ function cleanUpAddOnData()
 			StubbyConfig.boots[b] = nil
 
 			if (StubbyConfig.configs) then
-				if (cleanList == nil) then cleanList = {}; end
+				if (cleanList == nil) then cleanList = {} end
 				table.insert(cleanList, b)
 			end
 		end
 	end
 
-	if (cleanList) then cleanUpAddOnConfigs(); end
+	if (cleanList) then cleanUpAddOnConfigs() end
 end
 
 -- Shows confirmation dialogs to clean configuration for addons that have
 -- just been removed. Warning: Calls itself recursively until done.
 function cleanUpAddOnConfigs()
-	if (not cleanList) then return; end
+	if (not cleanList) then return end
 
-	local addonIndex = table.getn(cleanList)
+	local addonIndex = #cleanList
 	local addonName = cleanList[addonIndex]
 
 	if (addonIndex == 1) then
@@ -554,15 +864,15 @@ function cleanUpAddOnConfigs()
 		button2 = "Keep",
 		OnAccept = function()
 			StubbyConfig.configs[addonName] = nil
-			cleanUpAddOnConfigs();
+			cleanUpAddOnConfigs()
 		end,
 		OnCancel = function()
-			cleanUpAddOnConfigs();
+			cleanUpAddOnConfigs()
 		end,
 		timeout = 0,
 		whileDead = 1,
-	};
-	StaticPopup_Show("CLEANUP_STUBBY" .. addonIndex, "","");
+	}
+	StaticPopup_Show("CLEANUP_STUBBY" .. addonIndex, "","")
 end
 
 function shouldInspectAddOn(addonName)
@@ -577,21 +887,18 @@ function inspectAddOn(addonName, title, info)
 end
 
 function searchForNewAddOns()
-	local addonCount = GetNumAddOns()
-	local name, title, notes, enabled, loadable, reason, security, requiresLoad
-	for i=1, addonCount do
-		requiresLoad = false
-		name, title, notes, enabled, loadable, reason, security = GetAddOnInfo(i)
-		if (IsAddOnLoadOnDemand(i) and shouldInspectAddOn(name) and loadable) then
-			local addonDeps = { GetAddOnDependencies(i) }
-			for _, dependancy in pairs(addonDeps) do
-				if (string.lower(dependancy) == "stubby") then
-					requiresLoad = true
+	for i=1, GetNumAddOns() do
+		if IsAddOnLoadOnDemand(i) then
+			local name, title, notes, _, reason = GetAddOnInfo(i)
+			if shouldInspectAddOn(name) and (reason == "DEMAND_LOADED" or reason == "DEP_DEMAND_LOADED") then
+				for _, dependancy in pairs({GetAddOnDependencies(i)}) do
+					if (dependancy:lower() == "stubby") then
+						inspectAddOn(name, title, notes)
+						break
+					end
 				end
 			end
 		end
-
-		if (requiresLoad) then inspectAddOn(name, title, notes) end
 	end
 end
 
@@ -599,10 +906,10 @@ end
 -- related addon is not loaded yet, runs the boot script.
 function runBootCodes()
 	if (not StubbyConfig.boots) then return end
-	for addon, boots in StubbyConfig.boots do
+	for addon, boots in pairs(StubbyConfig.boots) do
 		if (not IsAddOnLoaded(addon) and IsAddOnLoadOnDemand(addon)) then
-			local _, _, _, _, loadable = GetAddOnInfo(addon)
-			if (loadable) then
+			local _, _, _, _, reason = GetAddOnInfo(addon)
+			if reason == "DEMAND_LOADED" or reason == "DEP_DEMAND_LOADED" then
 				for bootname, boot in pairs(boots) do
 					RunScript(boot)
 				end
@@ -627,27 +934,38 @@ function onWorldStart()
 end
 
 function onLoaded()
-	if not StubbyConfig.inspected then StubbyConfig.inspected = {} end
-	if not StubbyConfig.addinfo then StubbyConfig.addinfo = {} end
+	if (not (type(StubbyConfig) == "table")) then
+		StubbyConfig = {}
+	end
+	if (not StubbyConfig.inspected) then
+		StubbyConfig.inspected = {}
+	end
+	if (not StubbyConfig.addinfo) then
+		StubbyConfig.addinfo = {}
+	end
 	Stubby.RegisterEventHook("PLAYER_LOGIN", "Stubby", onWorldStart)
 end
 
-function events(event, param)
+function events(event, ...)
 	if (not event) then event = "" end
-	if (not param) then param = "" end
+	local firstArg = ...
 	if (event == "ADDON_LOADED") then
-		if (string.lower(param) == "stubby") then onLoaded() end
-		Stubby.LoadWatcher(param)
+		if (firstArg and (firstArg:lower() == "stubby")) then
+			onLoaded()
+		end
+		Stubby.LoadWatcher(...)
 	end
-	Stubby.EventWatcher(event)
+	Stubby.EventWatcher(event, ...)
 end
 
 function chatPrint(...)
 	if ( DEFAULT_CHAT_FRAME ) then
 		local msg = ""
-		for i=1, table.getn(arg) do
-			if i==1 then msg = arg[i]
-			else msg = msg.." "..arg[i]
+		for i = 1, select("#", ...) do
+			if (i == 1) then
+				msg = select(i, ...)
+			else
+				msg = msg.." "..select(i, ...)
 			end
 		end
 		DEFAULT_CHAT_FRAME:AddMessage(msg, 1.0, 0.35, 0.15)
@@ -657,10 +975,10 @@ end
 -- This function allows boot code to store a configuration variable
 -- by default the variable is per character unless isGlobal is set.
 function setConfig(ownerAddOn, variable, value, isGlobal)
-	local ownerIndex = string.lower(ownerAddOn)
-	local varIndex = string.lower(variable)
+	local ownerIndex = ownerAddOn:lower()
+	local varIndex = variable:lower()
 	if (not isGlobal) then
-		varIndex = string.lower(UnitName("player")) .. ":" .. varIndex
+		varIndex = UnitName("player"):lower() .. ":" .. varIndex
 	end
 
 	if (not StubbyConfig.configs) then StubbyConfig.configs = {} end
@@ -672,9 +990,9 @@ end
 -- it will prefer a player specific variable over a global with the
 -- same name
 function getConfig(ownerAddOn, variable)
-	local ownerIndex = string.lower(ownerAddOn)
-	local globalIndex = string.lower(variable)
-	local playerIndex = string.lower(UnitName("player")) .. ":" .. globalIndex
+	local ownerIndex = ownerAddOn:lower()
+	local globalIndex = variable:lower()
+	local playerIndex = UnitName("player"):lower() .. ":" .. globalIndex
 
 	if (not StubbyConfig.configs) then return end
 	if (not StubbyConfig.configs[ownerIndex]) then return end
@@ -689,12 +1007,12 @@ end
 -- global and player specific) or all config variables for the
 -- ownerAddOn if no variable is specified
 function clearConfig(ownerAddOn, variable)
-	local ownerIndex = string.lower(ownerAddOn)
+	local ownerIndex = ownerAddOn:lower()
 	if (not StubbyConfig.configs) then return end
 	if (not StubbyConfig.configs[ownerIndex]) then return end
 	if (variable) then
-		local globalIndex = string.lower(variable)
-		local playerIndex = string.lower(UnitName("player")) .. ":" .. globalIndex
+		local globalIndex = variable:lower()
+		local playerIndex = UnitName("player"):lower() .. ":" .. globalIndex
 		StubbyConfig.configs[ownerIndex][globalIndex] = nil
 		StubbyConfig.configs[ownerIndex][playerIndex] = nil
 	else
@@ -703,10 +1021,87 @@ function clearConfig(ownerAddOn, variable)
 end
 
 -- Extract the revision number from SVN keyword string
-local function getRevision()
-	local found, _, rev = string.find("$Revision: 941 $", "(%d+)")
-	if (found ~= nil) then return tonumber(rev); end
-	return nil
+function getRevision()
+	return tonumber(("$Rev: 6376 $"):match("(%d+)"))
+end
+
+-------------------------------------------------------------------------------
+-- This function is a modified and slower version of the table.remove()
+-- function. It is designed to work with lists even those which contain holes.
+--
+-- The function removes the element at the given position, which can be any key.
+-- The removed value is returned. In advance if the key is a number greater than
+-- zero, all elements starting at [pos+1] to table.max(n) will be shifted by
+-- one index.
+-- All elements with either negative, or hashed keys (i.e. keys which use
+-- strings, functions, or anything like this) as well as t[0] are not shifted
+-- or changed, except if the element is the one to be removed, in which case the
+-- element is being erased from the table.
+--
+-- If t[pos] does not exist, no elements will be removed, but all elements with
+-- indexes above pos will be shifted by one.
+--
+-- called by:
+--    hookCall() - after the original function has been called
+--
+-- parameters:
+--    t   - (list) table to be adjusted
+--    pos - (number) the position of the element which is to be removed
+--                   the specified number must be greater than 0
+--          (anything else) the element at this position will be removed but
+--                          no shifting is being performed
+--          nil, to remove the element at position: table.maxn(t)
+--
+-- returns:
+--    The value of the removed element.
+--
+-- remarks:
+--    The behaviour of table.remove() when working with tables which contain
+--    holes is undefined. For example {nil, true, nil} will correctly return
+--    nil when calling table.remove(), but the index of true, is not changed
+--    and will still be [2] after the function call.
+--    If this behaviour is not wanted, use this modified version of the
+--    original function.
+--    Also note that the runtime of this function is O(n), so use it with
+--    precaution.
+-------------------------------------------------------------------------------
+function tableRemoveNilSafe(t, pos)
+	pos = pos or table.maxn(t)
+
+	if pos == nil then
+		pos = table.maxn(t)
+		if pos == 0 then
+			-- the table does not contain any numeric indexes greater than 0, so there
+			-- is nothing todo for us
+			return
+		end
+	end
+
+	-- clearing the temporary table
+	for key, data in pairs(tempTable) do
+		tempTable[key] = nil
+	end
+
+	-- retrieve the key from the table and remove it
+	local ret = t[pos]
+	t[pos] = nil
+
+	-- construct the new table and clear the current one
+	for key, data in pairs(t) do
+		if (type(key) == 'number') and (key > pos) then
+			tempTable[key-1] = data
+		else
+			tempTable[key] = data
+		end
+		t[key] = nil
+	end
+
+	-- copy the temporary table to the current one
+	for key, data in pairs(tempTable) do
+		t[key] = data
+	end
+
+	return ret
 end
 
 -- Setup our Stubby global object. All interaction is done
@@ -721,6 +1116,7 @@ Stubby = {
 	ClearConfig = clearConfig,
 	GetOrigFunc = getOrigFunc,
 	LoadWatcher = loadWatcher,
+	ErrorHandler = errorHandler,
 	EventWatcher = eventWatcher,
 	RegisterBootCode = registerBootCode,
 	RegisterEventHook = registerEventHook,
@@ -733,4 +1129,9 @@ Stubby = {
 	CreateAddOnLoadBootCode = createAddOnLoadBootCode,
 	CreateEventLoadBootCode = createEventLoadBootCode,
 	CreateFunctionLoadBootCode = createFunctionLoadBootCode,
+	GetName = function() return "Stubby" end
+}
+
+StubbyHook = {
+	GetName = function() return "Hooked Function" end,
 }

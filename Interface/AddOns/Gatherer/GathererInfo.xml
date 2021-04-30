@@ -1,12 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-	<!--
-		Version: <%version%>
-		Revision: $Id: GathererInfo.xml,v 1.2 2005/09/06 11:15:20 islorgris Exp $
-	-->
 
 	<!-- Load scripts -->
- 	<Script file="GathererInfo.lua"/>	
+ 	<Script file="GathererInfo.lua"/>
 
 	<!-- Templates -->
 	<Button name="GathererInfo_FrameColumnHeaderTemplate" virtual="true">
@@ -63,7 +59,7 @@
 			</Anchors>
 		</NormalText>
 	</Button>
-	
+
 	<Button name="GathererInfo_FrameEntryStatusButtonTemplate" virtual="true" id="0">
 		<Size>
 			<AbsDimension x="298" y="16"/>
@@ -291,7 +287,7 @@
 			<EdgeSize>
 				<AbsValue val="32"/>
 			</EdgeSize>
-		</Backdrop>		
+		</Backdrop>
 		<Layers>
 			<Layer level="ARTWORK">
 				<Texture name="GathererInfo_FrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -373,7 +369,7 @@
 				</Scripts>
 			</Button>
 		</Frames>
-	  <Scripts> 
+	  <Scripts>
 	  	<OnLoad>
 	  		GathererInfo_LoadContinents( GetMapContinents() );
 			-- Tab Handling code
@@ -383,7 +379,7 @@
 		<OnShow>
 			GathererInfo_SetDefaultLocation();
 		</OnShow>
-      </Scripts> 
+      </Scripts>
 	</Frame>
 
 
@@ -704,9 +700,9 @@
 										<AbsDimension x="31" y="246"/>
 									</Size>
 									<Anchors>
-										<Anchor point="TOP" relativeTo="$parentScrollBarScrollUpButton">
+										<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
 											<Offset>
-												<AbsDimension x="0" y="5"/>
+												<AbsDimension x="-2" y="5"/>
 											</Offset>
 										</Anchor>
 									</Anchors>
@@ -717,9 +713,9 @@
 										<AbsDimension x="31" y="106"/>
 									</Size>
 									<Anchors>
-										<Anchor point="BOTTOM" relativeTo="$parentScrollBarScrollDownButton">
+										<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 											<Offset>
-												<AbsDimension x="0" y="-2"/>
+												<AbsDimension x="-2" y="-2"/>
 											</Offset>
 										</Anchor>
 									</Anchors>
@@ -1055,9 +1051,9 @@
 										<AbsDimension x="31" y="246"/>
 									</Size>
 									<Anchors>
-										<Anchor point="TOP" relativeTo="$parentScrollBarScrollUpButton">
+										<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
 											<Offset>
-												<AbsDimension x="0" y="5"/>
+												<AbsDimension x="-2" y="5"/>
 											</Offset>
 										</Anchor>
 									</Anchors>
@@ -1068,9 +1064,9 @@
 										<AbsDimension x="31" y="106"/>
 									</Size>
 									<Anchors>
-										<Anchor point="BOTTOM" relativeTo="$parentScrollBarScrollDownButton">
+										<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 											<Offset>
-												<AbsDimension x="0" y="-2"/>
+												<AbsDimension x="-2" y="-2"/>
 											</Offset>
 										</Anchor>
 									</Anchors>

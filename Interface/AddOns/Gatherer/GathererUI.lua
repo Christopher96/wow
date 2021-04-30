@@ -1,7 +1,5 @@
 --[[
-	GUI for Gatherer (by Jet, original idea and most of the base UI code came from bcui_TrackingMenu)
-	Version: <%version%>
-	Revision: $Id: GathererUI.lua,v 1.21 2006/01/04 12:36:44 islorgris Exp $
+	GUI for Gatherer (by Islorgris, original idea and most of the base UI code came from bcui_TrackingMenu)
 ]]
 
 -- Counter for fixed item count
@@ -32,22 +30,36 @@ GathererUI_QuickMenu = {
 
 -- ******************************************************************
 function GathererUI_OnLoad()
-	-- Register for the neccessary events.
-	this:RegisterEvent("PLAYER_ENTERING_WORLD");
-	this:RegisterEvent("UNIT_NAME_UPDATE");
-	
 	-- Create the slash commands to show/hide the menu.
 	SlashCmdList["GathererUI_SHOWMENU"] = GathererUI_ShowMenu;
 	SLASH_GathererUI_SHOWMENU1 = "/GathererUI_showmenu";
 	SlashCmdList["GathererUI_HIDEMENU"] = GathererUI_HideMenu;
 	SLASH_GathererUI_HIDEMENU1 = "/GathererUI_hidemenu";
-	
+
 	-- Create the slash commands to show/hide the options window.
 	SlashCmdList["GathererUI_SHOWOPTIONS"] = GathererUI_ShowOptions;
 	SLASH_GathererUI_SHOWOPTIONS1 = "/GathererUI_showoptions";
 	SlashCmdList["GathererUI_HIDEOPTIONS"] = GathererUI_HideOptions;
 	SLASH_GathererUI_HIDEOPTIONS1 = "/GathererUI_hideoptions";
+end
 
+function GathererUI_OnEvent()
+	if ( event == "VARIABLES_LOADED" ) then
+		local playerName = UnitName("player");
+		if ((playerName) and (playerName ~= UNKNOWNOBJECT)) then Gather_Player = playerName; end;
+		GathererUI_InitializeOptions();
+		GathererUI_InitializeMenu();
+		return;
+	end
+	if ( event == "UNIT_NAME_UPDATE" ) then
+		if ((arg1) and (arg1 == "player")) then
+			local playerName = UnitName("player");
+			if ((playerName) and (playerName ~= UNKNOWNOBJECT)) then
+				Gather_Player = playerName;
+				GathererUI_InitializeMenu();
+			end
+		end
+	end
 end
 
 -- ***********************************************************
@@ -71,9 +83,9 @@ function GathererUI_DialogFrame_ShowSubFrame(frameName)
 		if ( value == frameName ) then
 			getglobal(value):Show()
 		else
-			getglobal(value):Hide();	
-		end	
-	end 
+			getglobal(value):Hide();
+		end
+	end
 end
 function GathererUIFrameTab_OnClick()
 	if ( this:GetName() == "GathererUI_DialogFrameTab1" ) then
@@ -93,7 +105,7 @@ function GathererUI_ShowMenu(x, y, anchor)
 		return;
 	end
 
-	if (x == nil or y == nil) then
+	if (not x or not y) then
 		-- Get the cursor position.  Point is relative to the bottom left corner of the screen.
 		x, y = GetCursorPosition();
 	end
@@ -101,7 +113,7 @@ function GathererUI_ShowMenu(x, y, anchor)
 	if (anchor == nil) then
 		anchor = "center";
 	end
-	
+
 	-- Adjust for the UI scale.
 	x = x / UIParent:GetEffectiveScale();
 	y = y / UIParent:GetEffectiveScale();
@@ -134,130 +146,22 @@ function GathererUI_HideMenu()
 end
 
 -- ******************************************************************
-function GathererUI_OnEvent()
-	if ( event == "PLAYER_ENTERING_WORLD" ) then
-		local playerName = UnitName("player");
-		if ((playerName) and (playerName ~= UNKNOWNOBJECT)) then Gather_Player = playerName; end;
-		GathererUI_InitializeOptions();
-		GathererUI_InitializeMenu();
-		return;
-	end
-	if ( event == "UNIT_NAME_UPDATE" ) then
-		if ((arg1) and (arg1 == "player")) then
-			local playerName = UnitName("player");
-			if ((playerName) and (playerName ~= UNKNOWNOBJECT)) then
-				Gather_Player = playerName;
-				GathererUI_InitializeMenu();
-			end
-		end
-	end
-end
-
--- ******************************************************************
 function GathererUI_InitializeOptions()
+	local SETTINGS = Gatherer_Settings;
 
-	-- flag to determine if we show the menu when the mouse is over the icon.
-	if (GatherConfig.ShowOnMouse == nil) then
-		GatherConfig.ShowOnMouse = 1;
-	end
-	
-	-- flag to determine if we show the menu when the icon is clicked.
-	if (GatherConfig.ShowOnClick == nil) then
-		GatherConfig.ShowOnClick = 0;
-	end
-	
-	-- flag to determine if we show the menu when the bound key is pressed.
-	if (GatherConfig.ShowOnButton == nil) then
-		GatherConfig.ShowOnButton = 0;
-	end
-	
-	-- flag to determine if we hide the menu when the mouse is not over the icon.
-	if (GatherConfig.HideOnMouse == nil) then
-		GatherConfig.HideOnMouse = 1;
-	end
-	
-	-- flag to determine if we hide the menu when the icon is clicked.
-	if (GatherConfig.HideOnClick == nil) then
-		GatherConfig.HideOnClick = 0;
-	end
-	
-	-- flag to determine if we hide the menu when the bound key is pressed.
-	if (GatherConfig.HideOnButton == nil) then
-		GatherConfig.HideOnButton = 0;
-	end
-	
-	-- position of the icon around the border of the minimap.
-	if (GatherConfig.Position == nil) then
-		GatherConfig.Position = 12;
-	end
-	
-	-- radius from the minimap center
-	if (GatherConfig.Radius == nil) then
-		GatherConfig.Radius = 80;
-	end
-
-	if (GatherConfig.rareOre == nil) then
-		GatherConfig.rareOre = 0;
-	end
-
-	if (GatherConfig.NoIconOnMinDist == nil) then
-		GatherConfig.NoIconOnMinDist = 0;
-	end
-	
-	if (GatherConfig.HideIcon == nil) then
-		GatherConfig.HideIcon = 0;
-	end
-	
-	if (GatherConfig.HideMiniNotes == nil) then
-		GatherConfig.HideMiniNotes = 0;
-	end
-	
-	if (GatherConfig.ToggleWorldNotes == nil) then
-		GatherConfig.ToggleWorldNotes = 0;
-	end
-	
-	if (GatherConfig.IconSize == nil ) then
-		GatherConfig.IconSize = 12;
-	end
-
-	if (not GatherConfig.users) then
-			GatherConfig.users = {};
-		end
-	
-	if (not GatherConfig.users[Gather_Player]) then
-		GatherConfig.users[Gather_Player] = {};
-	end
-
-	if (GatherConfig.users[Gather_Player].filterRecording == nil ) then
-		GatherConfig.users[Gather_Player].filterRecording = {};
-	end
-
-	if (GatherConfig.showWorldMapFilters == nil ) then
-		GatherConfig.showWorldMapFilters = 0;
-	elseif ( GatherConfig.showWorldMapFilters == 1 ) then
+	if ( SETTINGS.showWorldMapFilters == 1 ) then
 		GathererWD_DropDownFilters:Show();
 	else
 		GathererWD_DropDownFilters:Hide();
 	end
-	
-	if ( GatherConfig.disableWMFreezeWorkaround and GatherConfig.disableWMFreezeWorkaround == true )
-	then
-		GatherConfig.disableWMFreezeWorkaround = 1;
-	end
-	
-	if ( not GatherConfig.disableWMFreezeWorkaround ) then
-		GatherConfig.disableWMFreezeWorkaround = 1;
-		Gatherer_WorldMapDisplay:Show();
-		Gatherer_WorldMapDisplay:SetText("Hide Items");
-	end
 
-	if ( GatherConfig.disableWMFreezeWorkaround == 1 ) then
+	if ( SETTINGS.disableWMFreezeWorkaround == 1 ) then
 		Gatherer_WorldMapDisplay:Show();
 	else
-		Gatherer_WorldMapDisplay:Hide();	
+		Gatherer_WorldMapDisplay:Hide();
 	end
-	
-	if ( GatherConfig.useMainmap)
+
+	if ( SETTINGS.useMainmap)
 	then
 		Gatherer_WorldMapDisplay:SetText("Hide Items");
 		GathererMapOverlayFrame:Show();
@@ -265,28 +169,31 @@ function GathererUI_InitializeOptions()
 		Gatherer_WorldMapDisplay:SetText("Show Items");
 		GathererMapOverlayFrame:Hide();
 	end
-		
-	
+
+	GathererHelp.currentPage = GathererHelp.currentPage or tonumber("1");
+
 	-- UI related
-	GathererUI_CheckShowOnMouse:SetChecked(GatherConfig.ShowOnMouse);
-	GathererUI_CheckHideOnMouse:SetChecked(GatherConfig.HideOnMouse);
-	GathererUI_CheckShowOnClick:SetChecked(GatherConfig.ShowOnClick);
-	GathererUI_CheckHideOnClick:SetChecked(GatherConfig.HideOnClick);
-	GathererUI_CheckHideIcon:SetChecked(GatherConfig.HideIcon);
-	GathererUI_CheckHideOnButton:SetChecked(GatherConfig.HideOnButton);
-	GathererUI_IconFrame:SetPoint("TOPLEFT", "Minimap", "TOPLEFT", 52 - (GatherConfig.Radius * cos(GatherConfig.Position)), (GatherConfig.Radius * sin(GatherConfig.Position)) - 52);
-	
+	GathererUI_CheckShowOnMouse:SetChecked(SETTINGS.ShowOnMouse);
+	GathererUI_CheckHideOnMouse:SetChecked(SETTINGS.HideOnMouse);
+	GathererUI_CheckShowOnClick:SetChecked(SETTINGS.ShowOnClick);
+	GathererUI_CheckHideOnClick:SetChecked(SETTINGS.HideOnClick);
+	GathererUI_CheckHideIcon:SetChecked(SETTINGS.HideIcon);
+	GathererUI_CheckHideOnButton:SetChecked(SETTINGS.HideOnButton);
+	GathererUI_IconFrame:SetPoint("TOPLEFT", "Minimap", "TOPLEFT", 52 - (SETTINGS.Radius * cos(SETTINGS.Position)), (SETTINGS.Radius * sin(SETTINGS.Position)) - 52);
+
 	-- Gatherer related
-	GathererUI_CheckNoMinIcon:SetChecked(GatherConfig.NoIconOnMinDist);
-	GathererUI_CheckRareOre:SetChecked(GatherConfig.rareOre);
-	GathererUI_CheckMapMinder:SetChecked(GatherConfig.mapMinder);
-	GathererUI_CheckHideMiniNotes:SetChecked(GatherConfig.HideMiniNotes);
-	GathererUI_CheckToggleWorldNotes:SetChecked(GatherConfig.ToggleWorldNotes);
-	GathererUI_CheckToggleWorldFilters:SetChecked(GatherConfig.showWorldMapFilters);
-	GathererUI_CheckHerbRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[1]);
-	GathererUI_CheckOreRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[2]);
-	GathererUI_CheckTreasureRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[0]);
-	GathererUI_CheckDisableWMFix:SetChecked(GatherConfig.disableWMFreezeWorkaround);
+	GathererUI_CheckNoMinIcon:SetChecked(SETTINGS.NoIconOnMinDist);
+	GathererUI_CheckRareOre:SetChecked(SETTINGS.rareOre);
+	GathererUI_CheckMapMinder:SetChecked(SETTINGS.mapMinder);
+	GathererUI_CheckHideMiniNotes:SetChecked(SETTINGS.HideMiniNotes);
+	GathererUI_CheckToggleWorldNotes:SetChecked(SETTINGS.ToggleWorldNotes);
+	GathererUI_CheckToggleWorldFilters:SetChecked(SETTINGS.showWorldMapFilters);
+	GathererUI_CheckHerbRecord:SetChecked(SETTINGS.filterRecording[1]);
+	GathererUI_CheckOreRecord:SetChecked(SETTINGS.filterRecording[2]);
+	GathererUI_CheckTreasureRecord:SetChecked(SETTINGS.filterRecording[0]);
+	GathererUI_CheckDisableWMFix:SetChecked(SETTINGS.disableWMFreezeWorkaround);
+
+	GathererUI_InitializeMenu();
 end
 
 -- ******************************************************************
@@ -294,12 +201,12 @@ function GathererUI_InitializeMenu()
 
 	GathererUI_IconFrame.haveAbilities = true;
 
-	if ( GatherConfig and GatherConfig.HideIcon and GatherConfig.HideIcon == 1 ) then
+	if ( Gatherer_Settings and Gatherer_Settings.HideIcon and Gatherer_Settings.HideIcon == 1 ) then
 		GathererUI_IconFrame:Hide();
 	else
 		GathererUI_IconFrame:Show();
 	end
-		
+
 
 	-- Set the text for the buttons while keeping track of how many
 	-- buttons we actually need.
@@ -309,14 +216,14 @@ function GathererUI_InitializeMenu()
 		gathermap_id = quickoptiondata.option;
 		count = count + 1;
 		local button = getglobal("GathererUI_PopupButton"..count);
-		Gatherer_Value="rien";
+		Gatherer_Value="none";
 		if ( gathermap_id =="useMinimap" ) then
 			Gatherer_Value = "off";
-			if (GatherConfig.useMinimap) then Gatherer_Value = "on"; end
+			if (Gatherer_Settings.useMinimap) then Gatherer_Value = "on"; end
 			button.SpellID = "toggle"
 		elseif (  gathermap_id == "useMainmap" ) then
 			Gatherer_Value = "off";
-			if (GatherConfig.useMainmap) then Gatherer_Value = "on"; end
+			if (Gatherer_Settings.useMainmap) then Gatherer_Value = "on"; end
 			button.SpellID = "mainmap toggle";
 		elseif ( gathermap_id == "report" ) then
 			button.SpellID = "report";
@@ -336,15 +243,11 @@ function GathererUI_InitializeMenu()
 		end
 		button:Show();
 	end
-	
+
 	-- Set the width for the menu.
 	local width = GathererUI_TitleButton:GetWidth();
-	for i = 1, count, 1 do
-		local button = getglobal("GathererUI_PopupButton"..i);
-		local w = button:GetTextWidth();
-		if (w > width) then
-			width = w;
-		end
+	for i = 1, count do
+		width = math.max(width, getglobal("GathererUI_PopupButton"..i):GetTextWidth());
 	end
 	GathererUI_Popup:SetWidth(width + 2 * GathererUI_BORDER_WIDTH);
 
@@ -352,37 +255,31 @@ function GathererUI_InitializeMenu()
 	-- on the button.  Set the width of each button to the width of the
 	-- menu so that you can still click on it without being directly
 	-- over the text.
-	for i = 1, count, 1 do
-		local button = getglobal("GathererUI_PopupButton"..i);
-		button:SetWidth(width);
+	for i = 1, count do
+		getglobal("GathererUI_PopupButton"..i):SetWidth(width);
 	end
 
 	-- Hide the buttons we don't need.
-	for i = count + 1, GathererUI_NUM_BUTTONS, 1 do
-		local button = getglobal("GathererUI_PopupButton"..i);
-		button:Hide();
+	for i = count + 1, GathererUI_NUM_BUTTONS do
+		getglobal("GathererUI_PopupButton"..i):Hide();
 	end
-	
+
 	-- Set the height for the menu.
 	GathererUI_Popup:SetHeight(GathererUI_BUTTON_HEIGHT + ((count + 1) * GathererUI_BUTTON_HEIGHT) + (3 * GathererUI_BUTTON_HEIGHT));
 end
 
 -- ******************************************************************
 function GathererUI_ButtonClick()
-
 	Gatherer_Command(this.SpellID);
-	GathererUI_InitializeMenu();	
-	
+	GathererUI_InitializeMenu();
 end
 
 -- ******************************************************************
 function GathererUI_Show()
 	-- Check to see if the aspect menu is shown.  If so, hide it before
 	-- showing the tracking menu.
-	if (GathererUI_Popup) then
-		if (GathererUI_Popup:IsVisible()) then
-			GathererUI_Hide();
-		end
+	if (GathererUI_Popup and GathererUI_Popup:IsVisible()) then
+		GathererUI_Hide();
 	end
 
 	GathererUI_Popup:Show();
@@ -407,14 +304,12 @@ end
 -- ******************************************************************
 function GathererUI_OnUpdate(dummy)
 	-- Check to see if the mouse is still over the menu or the icon.
-	
-	if (GatherConfig.HideOnMouse == 1 and GathererUI_Popup:IsVisible()) then
+	if (Gatherer_Settings.HideOnMouse == 1 and GathererUI_Popup:IsVisible()) then
 		if (not MouseIsOver(GathererUI_Popup) and not MouseIsOver(GathererUI_IconFrame)) then
 			-- If not, hide the menu.
 			GathererUI_Hide();
 		end
 	end
-
 end
 
 -- ******************************************************************
@@ -424,7 +319,7 @@ function GathererUI_IconFrameOnEnter()
 	GathererUI_Popup:SetPoint("TOPRIGHT", "GathererUI_IconFrame", "TOPLEFT");
 
 	-- Show the menu.
-	if (GatherConfig.ShowOnMouse == 1) then
+	if (Gatherer_Settings.ShowOnMouse == 1) then
 		GathererUI_Show();
 	end
 end
@@ -432,93 +327,123 @@ end
 -- ******************************************************************
 function GathererUI_IconFrameOnClick()
 	if (GathererUI_Popup:IsVisible()) then
-		if (GatherConfig.HideOnClick == 1) then
+		if (Gatherer_Settings.HideOnClick == 1) then
 			GathererUI_Hide();
 		end
 	else
-		if (GatherConfig.ShowOnClick == 1) then
+		if (Gatherer_Settings.ShowOnClick == 1) then
 			GathererUI_Show();
 		end
 	end
-
 end
 
 -- ******************************************************************
 function GathererUIDropDownTheme_Initialize()
-	local index, value;
-	info = {};
-	local gathererThemeList = { "shaded", "iconic", "original" }
-	
-	for index, value in gathererThemeList do
+	for value in Gather_IconSet do
+		local info = {};
 		info.text = value;
 		info.checked = nil;
 		info.func = GathererUIDropDownTheme_OnClick;
 		UIDropDownMenu_AddButton(info);
-		if (GatherConfig.iconSet == info.text) then
+		if (Gatherer_Settings.iconSet == info.text) then
 			UIDropDownMenu_SetText(info.text, GathererUI_DropDownTheme);
 		end
 	end
 end
 
-function GathererUIDropDownHerbs_Initialize(submenu)
-	local index, value;
-	info = {};
+function GathererUIDropDownHerbs_Initialize()
+	local filterValue = "herbs";
+	local iconIndex = 1;
+	local dropDownText = "Herbs";
+	GathererUIDropDown_Initialize(filterValue, iconIndex, dropDownText);
+end
 
+function GathererUIDropDownOre_Initialize()
+	local filterValue = "mining";
+	local iconIndex = 2;
+	local dropDownText = "Ore";
+	GathererUIDropDown_Initialize(filterValue, iconIndex, dropDownText);
+end
+
+function GathererUIDropDownTreasure_Initialize()
+	local filterValue = "treasure";
+	local iconIndex = 0;
+	local dropDownText = "Treasure";
+	GathererUIDropDown_Initialize(filterValue, iconIndex, dropDownText);
+end
+
+function GathererUIDropDown_Initialize(filterValue, iconIndex, dropDownText)
 	local varMenuVal1, varMenuVal2;
-	value = Gatherer_GetFilterVal("herbs");
+	local value = Gatherer_GetFilterVal(filterValue);
 	if ( value == "on" ) then
-		varMenuVal1 = "auto";
-		varMenuVal2 = "off";
+		varMenuVal1 = NORMAL_FONT_COLOR_CODE.."auto".."|r";
+		varMenuVal2 = NORMAL_FONT_COLOR_CODE.."off".."|r";
 	elseif ( value == "off" ) then
-		varMenuVal1 = "auto";
-		varMenuVal2 = "on";
+		varMenuVal1 = NORMAL_FONT_COLOR_CODE.."auto".."|r";
+		varMenuVal2 = NORMAL_FONT_COLOR_CODE.."on".."|r";
 	else
-		varMenuVal1 = "on";
-		varMenuVal2 = "off";
+		varMenuVal1 = NORMAL_FONT_COLOR_CODE.."on".."|r";
+		varMenuVal2 = NORMAL_FONT_COLOR_CODE.."off".."|r";
 	end
-	UIDropDownMenu_SetText(value, GathererUI_DropDownHerbs);
+	UIDropDownMenu_SetText(Gatherer_GetMenuName(value), getglobal("GathererUI_DropDown"..dropDownText));
 
-	local gathererFilters = { 
-				  varMenuVal1, varMenuVal2,  
-				  HERB_PEACEBLOOM, HERB_SILVERLEAF, HERB_EARTHROOT, 
-				  HERB_STRANGLEKELP, HERB_BRUISEWEED, HERB_WILDSTEELBLOOM, HERB_GRAVEMOSS, HERB_KINGSBLOOD, 
-				  HERB_LIFEROOT, HERB_FADELEAF, HERB_KHADGARSWHISKER, HERB_FIREBLOOM, HERB_GOLDTHORN, 
-				  HERB_BLINDWEED, HERB_SUNGRASS, HERB_GHOSTMUSHROOM, HERB_GOLDENSANSAM, 
-				  HERB_GROMSBLOOD, HERB_WINTERSBITE, HERB_ARTHASTEAR, HERB_BLACKLOTUS, HERB_DREAMFOIL, 
-				  HERB_ICECAP, HERB_MOUNTAINSILVERSAGE, HERB_PLAGUEBLOOM, 
-				};
+	local itemWithRareMatch = {};
+	local rareItem = {};
+	for iconName, rareMatch in Gather_RareMatch do
+		if (Gather_DB_IconIndex[iconIndex][iconName]) then
+			itemWithRareMatch[iconName] = rareMatch;
+			rareItem[rareMatch] = iconName;
+		end
+	end
 
-	if ( UIDROPDOWNMENU_MENU_VALUE == HERB_MAGEROYAL ) then
-		GathererUIDropDownHerbSub_Initialize(HERB_MAGEROYAL);
+	if ( itemWithRareMatch[UIDROPDOWNMENU_MENU_VALUE] ) then
+		GathererUIDropDownSub_Initialize(UIDROPDOWNMENU_MENU_VALUE, iconIndex, dropDownText);
 		return;
 	end
-		
-	if ( UIDROPDOWNMENU_MENU_VALUE == HERB_BRIARTHORN ) then
-		GathererUIDropDownHerbSub_Initialize(HERB_BRIARTHORN);
-		return;
+
+	local gathererFilters = {varMenuVal1, varMenuVal2};
+	for iconName in Gather_DB_IconIndex[iconIndex] do
+		if (iconName ~= "default" and not rareItem[iconName]) then
+			tinsert(gathererFilters, iconName);
+		end
 	end
-		
-	if ( UIDROPDOWNMENU_MENU_VALUE == HERB_PURPLELOTUS ) then
-		GathererUIDropDownHerbSub_Initialize(HERB_PURPLELOTUS);
-		return;
-	end
+
+	table.sort(gathererFilters, function (a, b)
+		local aSkillLevel = Gather_SkillLevel[a] or 0;
+		local bSkillLevel = Gather_SkillLevel[b] or 0;
+		if (strfind(a, "on|r") or strfind(a, "off|r") or strfind(a, "auto|r")) then
+			aSkillLevel = -1;
+		end
+		if (strfind(b, "on|r") or strfind(b, "off|r") or strfind(b, "auto|r")) then
+			bSkillLevel = -1;
+		end
+			return string.format("%03d%s", aSkillLevel, a) < string.format("%03d%s", bSkillLevel, b);
+		end);
+
 
 	for index, value in gathererFilters do
-		info = {};
-		info.text = value;
+		local info = {};
+		info.text = Gatherer_GetMenuName(value);
 		info.value = value;
 		info.checked = nil;
-		info.func = GathererUIDropDownFilterHerbs_OnClick;
+		if (itemWithRareMatch[value]) then
+			info.hasArrow = 1;
+			info.func = nil;
+		else
+			info.hasArrow = nil;
+			info.func = getglobal("GathererUIDropDownFilter"..dropDownText.."_OnClick");
+		end
 
-		if ( index > 2 and GatherConfig ) then
+		if (string.find(value, "on|r")) then info.value = "on"; end
+		if (string.find(value, "off|r")) then info.value = "off"; end
+		if (string.find(value, "auto|r")) then info.value = "auto"; end
+
+		if ( index > 2 and Gatherer_Settings) then
 			info.keepShownOnClick = 1;
-			if ( GatherConfig.users[Gather_Player] and
-				GatherConfig.users[Gather_Player].interested and
-				GatherConfig.users[Gather_Player].interested[1] and
-				GatherConfig.users[Gather_Player].interested[1][value] == true ) then
+
+			if ( Gatherer_Settings.interested[iconIndex][value] ) then
 				info.checked = 1;
 			end
-
 			info.textR = 1;
 			info.textG = 1;
 			info.textB = 1;
@@ -531,342 +456,125 @@ function GathererUIDropDownHerbs_Initialize(submenu)
 
 		UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
 	end
-		
-	info = {};
-	info.text = HERB_MAGEROYAL;
-	info.value = HERB_MAGEROYAL;
-	info.hasArrow = 1;
-	info.func = nil;
-
-	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
-
-	info = {};
-	info.text = HERB_BRIARTHORN;
-	info.value = HERB_BRIARTHORN;
-	info.hasArrow = 1;
-	info.func = nil;
-			
-	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
-
-	info = {};
-	info.text = HERB_PURPLELOTUS;
-	info.value = HERB_PURPLELOTUS;
-	info.hasArrow = 1;
-	info.func = nil;
-			
-	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
 end
 
-function GathererUIDropDownHerbSub_Initialize(submenu)
-	local value, info;
-	if ( UIDROPDOWNMENU_MENU_VALUE == HERB_MAGEROYAL or UIDROPDOWNMENU_MENU_VALUE == HERB_BRIARTHORN )
-	then
-		value=HERB_SWIFTTHISTLE;
-	elseif ( UIDROPDOWNMENU_MENU_VALUE == HERB_PURPLELOTUS ) then
-		value=HERB_WILDVINE;
-	else
-		return;
+function GathererUIDropDownSub_Initialize(rareItem, iconIndex, dropDownText)
+	if (not dropDownText) then
+		if (iconIndex == 1) then
+			dropDownText = "Herbs";
+		elseif (iconIndex == 2) then
+			dropDownText = "Ore";
+		elseif (iconIndex == 0) then
+			dropDownText = "Treasure";
+		end
 	end
-	
-	info = {};
-	info.text = UIDROPDOWNMENU_MENU_VALUE;
-	info.value = UIDROPDOWNMENU_MENU_VALUE;
-	info.checked = nil;
-	info.func = GathererUIDropDownFilterHerbs_OnClick;
 
-	if ( GatherConfig ) then
+	for index, value in {rareItem, Gather_RareMatch[rareItem]} do
+		local info = {};
+		info.text = Gatherer_GetMenuName(value);
+		info.value = value;
+		info.checked = nil;
+		info.func = getglobal("GathererUIDropDownFilter"..dropDownText.."_OnClick");
+
 		info.keepShownOnClick = 1;
-		if ( GatherConfig.users[Gather_Player] and
-			GatherConfig.users[Gather_Player].interested and
-			GatherConfig.users[Gather_Player].interested[1] and
-			GatherConfig.users[Gather_Player].interested[1][UIDROPDOWNMENU_MENU_VALUE] == true ) then
+		if ( Gatherer_Settings.interested[iconIndex][value] ) then
 			info.checked = 1;
 		end
 		info.textR = 1;
 		info.textG = 1;
 		info.textB = 1;
-	else
-		info.textR = 1;
-		info.textG = 1;
-		info.textB = 255;
-		info.checked = nil;
-	end
-	
-	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
-	
-    --	add additional button
-	info = {};
-	info.text = value;
-	info.value = value;
-	info.checked = nil;
-	info.func = GathererUIDropDownFilterHerbs_OnClick;
-
-	if ( GatherConfig ) then
-		info.keepShownOnClick = 1;
-		if ( GatherConfig.users[Gather_Player] and
-			GatherConfig.users[Gather_Player].interested and
-			GatherConfig.users[Gather_Player].interested[1] and
-			GatherConfig.users[Gather_Player].interested[1][value] == true ) then
-			info.checked = 1;
-		end
-		info.textR = 1;
-		info.textG = 1;
-		info.textB = 1;
-	else
-		info.textR = 1;
-		info.textG = 1;
-		info.textB = 255;
-		info.checked = nil;
-	end
-	
-	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
-	
-end
-
-function GathererUIDropDownOre_Initialize(submenu)
-	local index, value;
-	info = {};
-
-	local varMenuVal1, varMenuVal2;
-	value = Gatherer_GetFilterVal("mining");
-	if ( value == "on" ) then
-		varMenuVal1 = "auto";
-		varMenuVal2 = "off";
-	elseif ( value == "off" ) then
-		varMenuVal1 = "auto";
-		varMenuVal2 = "on";
-	else
-		varMenuVal1 = "on";
-		varMenuVal2 = "off";
-	end
-	UIDropDownMenu_SetText(value, GathererUI_DropDownOre);
-
-	local gathererFilters = { 
-				  varMenuVal1, varMenuVal2,  
-				  ORE_COPPER, 
-				  ORE_TIN, ORE_SILVER, 
-				  ORE_IRON, ORE_GOLD, 
-				  ORE_MITHRIL, ORE_TRUESILVER, 
-				  ORE_THORIUM, ORE_RTHORIUM,
-				  ORE_DARKIRON,
-				}
-
-	for index, value in gathererFilters do
-		info = {};
-		info.text = value;
-		info.value = value;
-		info.checked = nil;
-		info.func = GathererUIDropDownFilterOre_OnClick;
-
-		if ( index > 2 and GatherConfig ) then
-			info.keepShownOnClick = 1;
-			if ( GatherConfig.users[Gather_Player] and
-				GatherConfig.users[Gather_Player].interested and
-				GatherConfig.users[Gather_Player].interested[2] and
-				GatherConfig.users[Gather_Player].interested[2][value] == true ) then
-				info.checked = 1;
-			end
-			info.textR = 1;
-			info.textG = 1;
-			info.textB = 1;
-		else
-			info.textR = 1;
-			info.textG = 1;
-			info.textB = 255;
-			info.checked = nil;
-		end
 
 		UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
 	end
-end
-
-function GathererUIDropDownTreasure_Initialize(submenu)
-	local index, value;
-	info = {};
-
-	local varMenuVal1, varMenuVal2;
-	value = Gatherer_GetFilterVal("treasure");
-	if ( value == "on" ) then
-		varMenuVal1 = "auto";
-		varMenuVal2 = "off";
-	elseif ( value == "off" ) then
-		varMenuVal1 = "auto";
-		varMenuVal2 = "on";
-	else
-		varMenuVal1 = "on";
-		varMenuVal2 = "off";
-	end
-	UIDropDownMenu_SetText(value, GathererUI_DropDownTreasure);
-
-	local gathererFilters = { 
-				  varMenuVal1, varMenuVal2,  
-				  TREASURE_BOX, TREASURE_CHEST, TREASURE_CRATE, 
-				  TREASURE_BARREL, TREASURE_CASK,
-				  TREASURE_CLAM, TREASURE_FOOTLOCKER, TREASURE_BLOODPETAL,
-				  TREASURE_BLOODHERO, TREASURE_POWERCRYST, TREASURE_UNGOROSOIL,
-				  TREASURE_SHELLFISHTRAP,
-				}
-
-	for index, value in gathererFilters do
-		info = {}
-		info.text = value;
-		info.checked = nil;
-		info.func = GathererUIDropDownFilterTreasure_OnClick;
-
-		if ( index > 2 and GatherConfig ) then
-			info.keepShownOnClick = 1;
-			if ( GatherConfig.users[Gather_Player] and
-				GatherConfig.users[Gather_Player].interested and
-				GatherConfig.users[Gather_Player].interested[0] and
-				GatherConfig.users[Gather_Player].interested[0][value] == true ) then
-				info.checked = 1;
-			end
-			info.textR = 1;
-			info.textG = 1;
-			info.textB = 1;
-		else
-			info.textR = 1;
-			info.textG = 1;
-			info.textB = 255;
-			info.checked = nil;
-		end
-
-		UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
-	end	
 end
 
 -- World Map functions
 -- World Map filters dropdown Load
 function Gatherer_WorldMapFilter_Load()
-	local index;
-	local info = {};
-
 	UIDropDownMenu_SetText(GATHERER_FILTERDM_TEXT, GathererWD_DropDownFilters);
 
-	if ( UIDROPDOWNMENU_MENU_VALUE == "Herb" )
-	then
-		GathererUIDropDownHerbs_Initialize("Herb");
+	if ( UIDROPDOWNMENU_MENU_VALUE == "Herb" ) then
+		GathererUIDropDownHerbs_Initialize();
 		return;
-	elseif ( UIDROPDOWNMENU_MENU_VALUE == "Ore" )
-	then
-		GathererUIDropDownOre_Initialize("Ore");
+	elseif ( UIDROPDOWNMENU_MENU_VALUE == "Ore" ) then
+		GathererUIDropDownOre_Initialize();
 		return;
-	elseif ( UIDROPDOWNMENU_MENU_VALUE == "Treasure" )
-	then
-		GathererUIDropDownTreasure_Initialize("Treasure");
+	elseif ( UIDROPDOWNMENU_MENU_VALUE == "Treasure" ) then
+		GathererUIDropDownTreasure_Initialize();
 		return;
-	elseif( UIDROPDOWNMENU_MENU_VALUE == HERB_PURPLELOTUS or
-			UIDROPDOWNMENU_MENU_VALUE == HERB_BRIARTHORN or
-			UIDROPDOWNMENU_MENU_VALUE == HERB_MAGEROYAL )
-	then
-		GathererUIDropDownHerbSub_Initialize(UIDROPDOWNMENU_MENU_VALUE);
+	elseif( Gather_RareMatch[UIDROPDOWNMENU_MENU_VALUE] ) then
+		for iconIndex in Gather_DB_IconIndex do
+			if (Gather_DB_IconIndex[iconIndex][UIDROPDOWNMENU_MENU_VALUE]) then
+				GathererUIDropDownSub_Initialize(UIDROPDOWNMENU_MENU_VALUE, iconIndex);
+				break;
+			end
+		end
+
 		return;
 	end
-	
 
 
-	info.text= GATHERER_TEXT_TOGGLE_HERBS.."["..Gatherer_GetFilterVal("herbs").."]";
-	info.value= "Herb"
+	local info = {};
+	info.text = GATHERER_TEXT_TOGGLE_HERBS.."["..Gatherer_GetFilterVal("herbs").."]";
+	info.value = "Herb"
 	info.hasArrow = 1;
 	info.func = nil;
-	info.notCheckable=1;
+	info.notCheckable = 1;
 	UIDropDownMenu_AddButton(info);
 
-	info.text= GATHERER_TEXT_TOGGLE_MINERALS.."["..Gatherer_GetFilterVal("ore").."]";
-	info.value= "Ore"
+	local info = {};
+	info.text = GATHERER_TEXT_TOGGLE_MINERALS.."["..Gatherer_GetFilterVal("mining").."]";
+	info.value = "Ore"
 	info.hasArrow = 1;
 	info.func = nil;
-	info.notCheckable=1;
+	info.notCheckable = 1;
 	UIDropDownMenu_AddButton(info);
 
-	info.text= GATHERER_TEXT_TOGGLE_TREASURE.."["..Gatherer_GetFilterVal("treasure").."]";
-	info.value= "Treasure"
+	local info = {};
+	info.text = GATHERER_TEXT_TOGGLE_TREASURE.."["..Gatherer_GetFilterVal("treasure").."]";
+	info.value = "Treasure"
 	info.hasArrow = 1;
 	info.func = nil;
-	info.notCheckable=1;
+	info.notCheckable = 1;
 	UIDropDownMenu_AddButton(info);
 end
 
 -- ******************************************************************
 function GathererUIDropDownTheme_OnClick()
-	local cmd;
-
 	UIDropDownMenu_SetSelectedID(GathererUI_DropDownTheme, this:GetID());
-	cmd = UIDropDownMenu_GetText(GathererUI_DropDownTheme);
-	
+	local cmd = UIDropDownMenu_GetText(GathererUI_DropDownTheme);
 	Gatherer_Command("theme "..cmd);
 end
 
 function GathererUIDropDownFilterHerbs_OnClick()
-
-	if ( this:GetID() < 3 and (this.value == "on" or this.value == "off" or this.value == "auto")) then
-		cmd = UIDropDownMenu_SetText(this.value, GathererUI_DropDownHerbs);
-
-		Gatherer_Command("herbs "..this.value);
-		GathererUI_InitializeMenu();	
-	else
-		if ( not GatherConfig.users[Gather_Player].interested ) then
-			GatherConfig.users[Gather_Player].interested = {}; 
-		end
-		if ( not GatherConfig.users[Gather_Player].interested[1] ) then
-			GatherConfig.users[Gather_Player].interested[1] = {};
-		end
-
-		if ( this.checked ) then
-			GatherConfig.users[Gather_Player].interested[1][this.value] = nil;
-		else
-			GatherConfig.users[Gather_Player].interested[1][this.value] = true;
-		end
-	end
-	GatherMain_Draw();
+	local filterValue = "herbs";
+	local iconIndex = 1;
+	local dropDownText = "Herbs";
+	GathererUIDropDownFilter_OnClick(filterValue, iconIndex, dropDownText);
 end
 
 function GathererUIDropDownFilterOre_OnClick()
-
-	if ( this:GetID() < 3 ) then
-		UIDropDownMenu_SetText(this.value, GathererUI_DropDownOre);
-
-		Gatherer_Command("mining "..this.value);
-		GathererUI_InitializeMenu();
-	else
-		if ( not GatherConfig.users[Gather_Player].interested ) then 
-			GatherConfig.users[Gather_Player].interested = {}; 
-		end
-		if ( not GatherConfig.users[Gather_Player].interested[2] ) then
-			GatherConfig.users[Gather_Player].interested[2] = {};
-		end
-		
-
-		if ( this.checked ) then
-			GatherConfig.users[Gather_Player].interested[2][this.value] = nil;
-		else
-			GatherConfig.users[Gather_Player].interested[2][this.value] = true;
-		end		
-	end
-	GatherMain_Draw();
+	local filterValue = "mining";
+	local iconIndex = 2;
+	local dropDownText = "Ore";
+	GathererUIDropDownFilter_OnClick(filterValue, iconIndex, dropDownText);
 end
 
 function GathererUIDropDownFilterTreasure_OnClick()
+	local filterValue = "treasure";
+	local iconIndex = 0;
+	local dropDownText = "Treasure";
+	GathererUIDropDownFilter_OnClick(filterValue, iconIndex, dropDownText);
+end
 
-	if ( this:GetID() < 3 ) then
-		UIDropDownMenu_SetText(this.value, GathererUI_DropDownTreasure);
+function GathererUIDropDownFilter_OnClick(filterValue, iconIndex, dropDownText)
+	if ( this:GetID() < 3 and (this.value == "on" or this.value == "off" or this.value == "auto")) then
+		UIDropDownMenu_SetText(Gatherer_GetMenuName(this.value), getglobal("GathererUI_DropDown"..dropDownText));
 
-		Gatherer_Command("treasure "..this.value);
-		GathererUI_InitializeMenu();	
+		Gatherer_Command(filterValue.." "..this.value);
+		GathererUI_InitializeMenu();
 	else
-		if ( not GatherConfig.users[Gather_Player].interested ) then 
-			GatherConfig.users[Gather_Player].interested = {}; 
-		end
-		if ( not GatherConfig.users[Gather_Player].interested[0] ) then
-			GatherConfig.users[Gather_Player].interested[0] = {};
-		end
-
-
-		if ( this.checked ) then
-			GatherConfig.users[Gather_Player].interested[0][this.value] = nil;
-		else
-			GatherConfig.users[Gather_Player].interested[0][this.value] = true;
-		end		
+		Gatherer_Settings.interested[iconIndex][this.value] = not this.checked;
 	end
 	GatherMain_Draw();
 end
@@ -878,8 +586,8 @@ function GathererUI_OnEnterPressed_HerbSkillEditBox()
 	if ( GathererUI_HerbSkillEditBox:GetNumber() < 0 ) then
 		GathererUI_HerbSkillEditBox:SetNumber(0);
 	end
-	
-	GatherConfig.users[Gather_Player].minSetHerbSkill = GathererUI_HerbSkillEditBox:GetNumber();
+
+	Gatherer_Settings.minSetHerbSkill = GathererUI_HerbSkillEditBox:GetNumber();
 end
 
 function GathererUI_OnEnterPressed_OreSkillEditBox()
@@ -889,36 +597,32 @@ function GathererUI_OnEnterPressed_OreSkillEditBox()
 	if ( GathererUI_OreSkillEditBox:GetNumber() < 0 ) then
 		GathererUI_OreSkillEditBox:SetNumber(0);
 	end
-	GatherConfig.users[Gather_Player].minSetOreSkill = GathererUI_OreSkillEditBox:GetNumber();
+	Gatherer_Settings.minSetOreSkill = GathererUI_OreSkillEditBox:GetNumber();
 end
 
 function GathererUI_OnEnterPressed_IconSizeEditBox()
-	if (GatherConfig) then
-		if ( GathererUI_WorldMapIconSize:GetNumber() < 8 or GathererUI_WorldMapIconSize:GetNumber() > 16 ) then
-			if ( GatherConfig.IconSize ) then
-				GathererUI_WorldMapIconSize:SetNumber(GatherConfig.IconSize)
-			else	
-				GathererUI_WorldMapIconSize:SetNumber(12);
-			end
+	if ( GathererUI_WorldMapIconSize:GetNumber() < 8 or GathererUI_WorldMapIconSize:GetNumber() > 16 ) then
+		if ( Gatherer_Settings.IconSize ) then
+			GathererUI_WorldMapIconSize:SetNumber(Gatherer_Settings.IconSize)
+		else
+			GathererUI_WorldMapIconSize:SetNumber(12);
 		end
-					
-		GatherConfig.IconSize = GathererUI_WorldMapIconSize:GetNumber();
 	end
+	Gatherer_Settings.IconSize = GathererUI_WorldMapIconSize:GetNumber();
 end
 
 function GathererUI_OnEnterPressed_IconAlphaEditBox()
-	if (GatherConfig) then
-		if ( GathererUI_WorldMapIconAlpha:GetNumber() < 20 or GathererUI_WorldMapIconAlpha:GetNumber() > 100 ) then
-			if ( GatherConfig.IconAlpha ) then
-				GathererUI_WorldMapIconAlpha:SetNumber(GatherConfig.IconAlpha/100)
-			else	
-				GathererUI_WorldMapIconAlpha:SetNumber(80);
-			end
+	if ( GathererUI_WorldMapIconAlpha:GetNumber() < 20 or GathererUI_WorldMapIconAlpha:GetNumber() > 100 ) then
+		if ( Gatherer_Settings.IconAlpha ) then
+			GathererUI_WorldMapIconAlpha:SetNumber(Gatherer_Settings.IconAlpha/100)
+		else
+			GathererUI_WorldMapIconAlpha:SetNumber(80);
 		end
-					
-		GatherConfig.IconAlpha = GathererUI_WorldMapIconAlpha:GetNumber();
 	end
-end-- *******************************************************************
+	Gatherer_Settings.IconAlpha = GathererUI_WorldMapIconAlpha:GetNumber();
+end
+
+-- *******************************************************************
 -- Zone Rematch Section: Handle with care
 
 function GathererUI_ZoneRematch(sourceZoneMapping, destZoneMapping)
@@ -939,8 +643,8 @@ function GathererUI_ZoneRematch(sourceZoneMapping, destZoneMapping)
 				NewGatherItems[idx_c][new_idx_z] = {};
 				for myItems, rec_gatheritem in rec_zone do
 					local fixedItemName;
-					if (gathererFixItems == 1) then 
-						fixedItemName = GathererUI_FixItemName(myItems); 
+					if (gathererFixItems == 1) then
+						fixedItemName = GathererUI_FixItemName(myItems);
 					else
 						fixedItemName= myItems;
 					end
@@ -950,7 +654,7 @@ function GathererUI_ZoneRematch(sourceZoneMapping, destZoneMapping)
 						if ( type(myGather.gtype) == "number" ) then
 							myGatherType = myGather.gtype;
 						else
-							myGatherType = Gather_DB_TypeIndex[myGather.gtype];
+							myGatherType = Gatherer_EGatherType[myGather.gtype];
 						end
 						if ( type(myGather.icon) == "number" ) then
 							myIcon= myGather.icon;
@@ -961,7 +665,7 @@ function GathererUI_ZoneRematch(sourceZoneMapping, destZoneMapping)
 						if ( myGatherType == 2 and myIcon == 8 ) then
 							myIcon = Gatherer_GetDB_IconIndex(Gatherer_FindOreType(fixedItemName), myGatherType);
 						end
-						
+
 						NewGatherItems[idx_c][new_idx_z][fixedItemName][idx_item] = { x=myGather.x, y=myGather.y, gtype=myGatherType, icon=myIcon, count=myGather.count };
 						fixedItemCount = fixedItemCount + 1;
 					end
@@ -981,34 +685,28 @@ function GathererUI_ShowRematchDialog()
 	else
 		GathererUI_ZoneRematchDialog:Show()
 	end
-
 end
 
 -- *******************************************************************
 -- DropDown Menu functions
 function GathererUIDropDownSourceZone_Initialize()
-	local index;
-	info = {};
-
 	for index in GathererUI_ZoneMatchTable do
+		local info = {};
 		info.text = index;
 		info.checked = nil;
 		info.func = GathererUIDropDownFilterSourceZone_OnClick;
 		UIDropDownMenu_AddButton(info);
-		if ( GatherConfig.DataBuild and GatherConfig.DataBuild == info.text ) then
+		if ( Gatherer_Settings.DataBuild and Gatherer_Settings.DataBuild == info.text ) then
 			UIDropDownMenu_SetText(info.text, GathererUI_SourceZoneDropDown);
 		end
-	end	
-
+	end
 end
 
 function GathererUIDropDownDestionationZone_Initialize()
-	local index, cmd;
-	info = {};
-
-	cmd = UIDropDownMenu_GetText(GathererUI_SourceZoneDropDown);
-	if ( cmd ~= nil and cmd ~= "" ) then
+	local cmd = UIDropDownMenu_GetText(GathererUI_SourceZoneDropDown);
+	if ( cmd and cmd ~= "" ) then
 		for index in GathererUI_ZoneMatchTable[cmd] do
+			local info = {};
 			info.text = index;
 			info.checked = nil;
 			info.func = GathererUIDropDownFilterDestinationZone_OnClick;
@@ -1021,7 +719,6 @@ end
 -- OnClick in DropDown Menu functions
 function GathererUIDropDownFilterSourceZone_OnClick()
 	UIDropDownMenu_SetSelectedID(GathererUI_SourceZoneDropDown, this:GetID());
-
 	GathererUI_DestinationZoneDropDown:Show();
 end
 
@@ -1032,7 +729,7 @@ end
 -- *******************************************************************
 -- Apply Button
 function GathererUI_ShowRematchDialogApply()
-	local source, dest;
+	local source, dest
 	source = UIDropDownMenu_GetText(GathererUI_SourceZoneDropDown);
 	dest = UIDropDownMenu_GetText(GathererUI_DestinationZoneDropDown);
 
@@ -1041,8 +738,6 @@ function GathererUI_ShowRematchDialogApply()
 		GathererUI_HideOptions()
 		-- add extra confirmation dialog
 		StaticPopup_Show("CONFIRM_REMATCH");
-
-		
 	elseif ( not source ) then
 		Gatherer_ChatPrint(GATHERER_TEXT_SRCZONE_MISSING);
 	else
@@ -1063,17 +758,14 @@ StaticPopupDialogs["CONFIRM_REMATCH"] = {
 };
 
 function Gatherer_ConfirmZoneRematch()
-	local source, dest;
-	source = UIDropDownMenu_GetText(GathererUI_SourceZoneDropDown);
-	dest = UIDropDownMenu_GetText(GathererUI_DestinationZoneDropDown);
+	local source = UIDropDownMenu_GetText(GathererUI_SourceZoneDropDown);
+	local dest = UIDropDownMenu_GetText(GathererUI_DestinationZoneDropDown);
 
-		-- Swap tables and Recompute notes
-		GathererUI_ZoneRematch(source, dest);
-		GatherItems = NewGatherItems;
-		GatherConfig.DataBuild = dest;
-
-		GathererUI_ShowRematchDialog();
-
+	-- Swap tables and Recompute notes
+	GathererUI_ZoneRematch(source, dest);
+	GatherItems = NewGatherItems;
+	Gatherer_Settings.DataBuild = dest;
+	GathererUI_ShowRematchDialog();
 end
 
 -- **************************************************************************
@@ -1085,10 +777,9 @@ function GathererUI_HelpFrame_Update()
 	GathererUI_HelpFrameName:SetText("Gatherer Help");
 
 	local help = GathererHelp;
-	local currentPage, totalPages;
 
-	currentPage = help.currentPage;
-	totalPages = 9;
+	local currentPage = help.currentPage;
+	local totalPages = 9;
 
 	GathererUI_HelpFrameHelp:SetText(help[currentPage]);
 	GathererUI_HelpFramePage:SetText("Page "..currentPage.."/"..totalPages);
@@ -1100,7 +791,7 @@ function GathererUI_HelpFrame_UpdateButtons()
 
 	-- Get the help
 	local help = GathererHelp;
-	
+
 	-- Check if there is an help
 	local currentPage = help.currentPage;
 	local totalPages = 9;
@@ -1126,10 +817,9 @@ function GathererUI_HelpFramePrevPageButton_OnClick()
 	-- Set the current page to previous page
 	local help = GathererHelp;
 	help.currentPage = help.currentPage - 1;
-	
+
 	-- Update the help
 	GathererUI_HelpFrame_Update()
-
 end
 
 -- Help next page OnClick event
@@ -1138,9 +828,8 @@ function GathererUI_HelpFrameNextPageButton_OnClick()
 	-- Set the current page to next page
 	local help = GathererHelp;
 	help.currentPage = help.currentPage + 1;
-	
+
 	-- Update the help
 	GathererUI_HelpFrame_Update();
-
 end
 

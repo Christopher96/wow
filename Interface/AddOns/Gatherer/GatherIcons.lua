@@ -1,52 +1,31 @@
 --[[
 
 	Icon set definitions
-	Version: <%version%>
-	Revision: $Id: GatherIcons.lua,v 1.10 2005/09/10 11:13:05 islorgris Exp $
 
 ]]
 
 Gather_IconSet = {
 	["original"] = {
-		["Default"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Blue",
-		},
-		["Ore"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Original\\Ore",
-		},
-		["Herb"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Original\\Herb",
-		},
-		["Treasure"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Original\\Chest",
-		},
-		["Test"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Original\\Test",
-		},
+		["Default"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Blue"},
+		["Ore"]			= {["default"] = "Interface\\AddOns\\Gatherer\\Original\\Ore"},
+		["Herb"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Original\\Herb"},
+		["Treasure"]	= {["default"] = "Interface\\AddOns\\Gatherer\\Original\\Chest"},
+		["Test"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Original\\Test"},
+	},
+	["iconshade"] = {
+		["Test"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Original\\Test"},
 	},
 	["shaded"] = {
-		["Default"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Blue",
-		},
-		["Ore"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Red",
-		},
-		["Herb"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Green",
-		},
-		["Treasure"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Yellow",
-		},
-		["Test"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Test",
-		},
+		["Default"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Blue"},
+		["Ore"]			= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Red"},
+		["Herb"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Green"},
+		["Treasure"]	= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Yellow"},
+		["Test"]		= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Test"},
 	},
 	["iconic"] = {
-		["Default"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Blue",
-		},
+		["Default"] = {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Blue"},
 		["Ore"] = {
-			["default"]     = "Interface\\AddOns\\Gatherer\\Shaded\\Red",
+			["default"]      = "Interface\\AddOns\\Gatherer\\Shaded\\Red",
 			[ORE_COPPER]     = "Interface\\AddOns\\Gatherer\\Icons\\OreCopper",
 			[ORE_TIN]        = "Interface\\AddOns\\Gatherer\\Icons\\OreTin",
 			[ORE_SILVER]     = "Interface\\AddOns\\Gatherer\\Icons\\OreSilver",
@@ -57,8 +36,6 @@ Gather_IconSet = {
 			[ORE_THORIUM]    = "Interface\\AddOns\\Gatherer\\Icons\\OreThorium",
 			[ORE_RTHORIUM]   = "Interface\\Addons\\Gatherer\\Icons\\OreRThorium",
 			[ORE_DARKIRON]   = "Interface\\Addons\\Gatherer\\Icons\\OreDarkIron",
---			[ORE_INDURIUM]   = "Interface\\Addons\\Gatherer\\Icons\\OreIndurium",
---			[ORE_BLOODSTONE]   = "Interface\\Addons\\Gatherer\\Icons\\OreBloodstone",
 		},
 		["Herb"] = {
 			["default"]               = "Interface\\AddOns\\Gatherer\\Shaded\\Green",
@@ -94,34 +71,36 @@ Gather_IconSet = {
 			[HERB_WILDVINE]           = "Interface\\AddOns\\Gatherer\\Icons\\HerbKingsblood",
 		},
 		["Treasure"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Yellow",
-			[TREASURE_BOX] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureCrate",
-			[TREASURE_CHEST] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureChest",
-			[TREASURE_CLAM] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureClam",
-			[TREASURE_CRATE] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureCrate",
-			[TREASURE_BARREL] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureBarrel",
-			[TREASURE_CASK] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureBarrel",
-			[TREASURE_FOOTLOCKER] = "Interface\\AddOns\\Gatherer\\Icons\\TreasureChest",
-			[TREASURE_UNGOROSOIL] = "Interface\\AddOns\\Gatherer\\Icons\\UngoroDirtPile",
-			[TREASURE_BLOODPETAL] = "Interface\\AddOns\\Gatherer\\Icons\\UngoroSprout",
-			[TREASURE_POWERCRYST] = "Interface\\AddOns\\Gatherer\\Icons\\UngoroCrystal",
-			[TREASURE_BLOODHERO]  = "Interface\\Icons\\INV_Potion_33", 
-			[TREASURE_SHELLFISHTRAP] = "Interface\\Icons\\INV_Misc_Fish_14",
+			["default"]			= "Interface\\AddOns\\Gatherer\\Shaded\\Yellow",
+			[TREASURE_BOX]			= "Interface\\AddOns\\Gatherer\\Icons\\TreasureCrate",
+			[TREASURE_CHEST]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureChest",
+			[TREASURE_CLAM]			= "Interface\\AddOns\\Gatherer\\Icons\\TreasureClam",
+			[TREASURE_CRATE]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureCrate",
+			[TREASURE_BARREL]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureBarrel",
+			[TREASURE_CASK]			= "Interface\\AddOns\\Gatherer\\Icons\\TreasureBarrel",
+			[TREASURE_FOOTLOCKER]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureChest",
+			[TREASURE_UNGOROSOIL]		= "Interface\\AddOns\\Gatherer\\Icons\\UngoroDirtPile",
+			[TREASURE_BLOODPETAL]		= "Interface\\AddOns\\Gatherer\\Icons\\UngoroSprout",
+			[TREASURE_POWERCRYST]		= "Interface\\AddOns\\Gatherer\\Icons\\UngoroCrystal",
+			[TREASURE_BLOODHERO]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureBloodHero",
+			[TREASURE_SHELLFISHTRAP]	= "Interface\\AddOns\\Gatherer\\Icons\\TreasureShellfishTrap",
+			[TREASURE_FISHNODE]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureFishnode",
+			[TREASURE_FISHWRECK]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureFishwreck",
+			[TREASURE_FISHELEM]		= "Interface\\AddOns\\Gatherer\\Icons\\TreasureFishElem",
+			[TREASURE_NIGHTDRAGON]		= "Interface\\Icons\\INV_Misc_Food_45",
+			[TREASURE_WHIPPERROOT]		= "Interface\\Icons\\INV_Misc_Food_55",
+			[TREASURE_WINDBLOSSOM]		= "Interface\\Icons\\INV_Misc_Food_58",
+			[TREASURE_SONGFLOWER]		= "Interface\\Icons\\Spell_Holy_MindVision",
 		},
-		["Test"] = {
-			["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Test",
-		},
+		["Test"]	= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Test"},
 	},
 };
 
 -- Ore rare spawn/Herbs find with  matching table
 Gather_RareMatch = {
 	[ORE_TIN] = ORE_SILVER,
-	[ORE_SILVER] = ORE_TIN,
 	[ORE_IRON] = ORE_GOLD,
-	[ORE_GOLD] = ORE_IRON,
 	[ORE_MITHRIL] = ORE_TRUESILVER,
-	[ORE_TRUESILVER] = ORE_MITHRIL,
 	[HERB_MAGEROYAL] = HERB_SWIFTTHISTLE,
 	[HERB_BRIARTHORN] = HERB_SWIFTTHISTLE,
 	[HERB_PURPLELOTUS] = HERB_WILDVINE,
@@ -129,16 +108,18 @@ Gather_RareMatch = {
 
 -- Skill levels required
 Gather_SkillLevel = {
+		-- Ores
         [ORE_COPPER]     = 1,
         [ORE_TIN]        = 65,
         [ORE_SILVER]     = 75,
         [ORE_IRON]       = 125,
         [ORE_GOLD]       = 155,
         [ORE_MITHRIL]    = 175,
-	[ORE_TRUESILVER] = 230,
+        [ORE_TRUESILVER] = 230,
         [ORE_THORIUM]    = 245,
         [ORE_RTHORIUM]   = 270,
-	[ORE_DARKIRON]   = 230,
+        [ORE_DARKIRON]   = 230,
+        -- Herbs
         [HERB_PEACEBLOOM]        = 1,
         [HERB_SILVERLEAF]        = 1,
         [HERB_EARTHROOT]         = 15,
@@ -171,64 +152,90 @@ Gather_SkillLevel = {
         [HERB_BLACKLOTUS]        = 300,
 };
 
-	-- [ORE_INCENDICITE] = 65,
-	-- [ORE_BLOODSTONE] = 165,
-	-- [ORE_INDURIUM] = 300,
-
 -- Match tables for shorter DB format
+-- converting IconIndex to IconName and vice versa
 function Gatherer_GetDB_IconIndex(iconIndex, gatherType)
-	local iconName, myGather;
+	-- type: (Icon, Optional[Gatherer_EGatherType]) -> Tuple[Icon, Optional[Gatherer_EGatherType]]
+	local iconName, gatherTypeIndex;
 
-	if ( type(gatherType) == "string" ) then
-		myGather = Gather_DB_TypeIndex[gatherType];
-	else
-		myGather = gatherType;
+	-- if gatherType wasn't set while icon was searched by name
+	if ( not gatherType and type(iconIndex) == "string" ) then
+		-- try to find icon index by looking through *every* possible gatherType
+		for myGather in Gatherer_EGatherType do
+			local icon = Gatherer_GetDB_IconIndex(iconIndex, myGather);
+			if (icon) then
+				-- this time return both index and hitted gatherType
+				return icon, myGather;
+			end;
+		end
 	end
 
-	for iconName in Gather_DB_IconIndex[myGather] do
-		if ( type(iconIndex) == "string" and iconName == iconIndex ) then 
+	gatherTypeIndex = Gatherer_EGatherType_ensureIndex(gatherType)
+	-- when gatherType isn't set and type(iconIndex) ~= 'string'
+	-- it'll loudly fail since gatherTypeIndex would be nil
+	for iconName in Gather_DB_IconIndex[gatherTypeIndex] do
+		if ( type(iconIndex) == "string" and iconName == iconIndex ) then
 			-- return index number
-			return Gather_DB_IconIndex[myGather][iconName];
-		elseif ( type(iconIndex) == "number" and Gather_DB_IconIndex[myGather][iconName] == iconIndex ) then
+			return Gather_DB_IconIndex[gatherTypeIndex][iconName];
+		elseif ( type(iconIndex) == "number" and Gather_DB_IconIndex[gatherTypeIndex][iconName] == iconIndex ) then
 			-- return icon string
 			return iconName;
-		end 
-	end	
+		end
+	end
 
-	return iconIndex;
+	return nil;
 end
 
-Gather_DB_TypeIndex = {
-	[0] 		= "Treasure",
-	[1] 		= "Herb",
-	[2] 		= "Ore",
-	[3]             = "Default",
-	["Treasure"]	= 0,
-	["Herb"]	= 1,
-	["Ore"]		= 2,
-	["Default"]     = 3,
-};
+function Gatherer_GetDB_IconByGatherName(gatherName)
+	local iconName, numType;
+	local iconName = Gatherer_FindOreType(gatherName);
+	if (iconName) then -- Ore
+		numType = 2;
+	else
+		iconName = Gatherer_FindTreasureType(gatherName);
+		if (iconName) then -- Treasure
+			numType = 0;
+		else -- Herb
+			iconName = gatherName;
+			numType = 1;
+		end
+	end
+	if (not iconName) then
+		iconName = "default";
+		numType = 3;
+	end
+
+	return iconName, numType;
+end
 
 -- Icon indexes
 -- 0 => Treasures
 -- 1 => Herbs
 -- 2 => Ores
+-- Note: If you add new items, use icon index numbers starting from 100
 
-Gather_DB_IconIndex = {};
+Gather_DB_IconIndex = {}; -- type: Dict[Gatherer_EGatherType, Dict[IconName, IconIndex]]
 Gather_DB_IconIndex[0] = {
-	["default"]           = 0,
-	[TREASURE_BOX]        = 1,
-	[TREASURE_CHEST]      = 2,
-	[TREASURE_CLAM]       = 3,
-	[TREASURE_CRATE]      = 4,
-	[TREASURE_BARREL]     = 5,
-	[TREASURE_CASK]       = 6,
-	[TREASURE_FOOTLOCKER] = 7,
-	[TREASURE_UNGOROSOIL] = 8,
-	[TREASURE_BLOODPETAL] = 9,
-	[TREASURE_POWERCRYST] = 10,
-	[TREASURE_BLOODHERO]  = 11,
-	[TREASURE_SHELLFISHTRAP]=12,
+	["default"]             = 0,
+	[TREASURE_BOX]          = 1,
+	[TREASURE_CHEST]        = 2,
+	[TREASURE_CLAM]         = 3,
+	[TREASURE_CRATE]        = 4,
+	[TREASURE_BARREL]       = 5,
+	[TREASURE_CASK]         = 6,
+	[TREASURE_FOOTLOCKER]   = 7,
+	[TREASURE_UNGOROSOIL]   = 8,
+	[TREASURE_BLOODPETAL]   = 9,
+	[TREASURE_POWERCRYST]   = 10,
+	[TREASURE_BLOODHERO]    = 11,
+	[TREASURE_SHELLFISHTRAP]= 12,
+	[TREASURE_FISHNODE]     = 13,
+	[TREASURE_FISHWRECK]    = 14,
+	[TREASURE_FISHELEM]     = 15,
+	[TREASURE_NIGHTDRAGON]	= 16,
+	[TREASURE_WHIPPERROOT]	= 17,
+	[TREASURE_WINDBLOSSOM]	= 18,
+	[TREASURE_SONGFLOWER]	= 19,
 };
 
 Gather_DB_IconIndex[1] = {

@@ -1,7 +1,6 @@
 <Bindings>
 	<!--
-		Version: <%version%>
-		Revision: $Id: Bindings.xml,v 1.4 2005/08/24 21:24:27 islorgris Exp $
+		Revision: $Id: Bindings.xml 284 2006-09-14 22:56:01Z esamynn $
 	-->
 	<!-- User interface key bindings -->
 	<Binding name="GATHERER_BINDING_QUICKMENU" runOnUp="false" header="GATHERER_BINDINGS_HEADER">

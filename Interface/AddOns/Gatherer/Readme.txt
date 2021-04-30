@@ -1,5 +1,18 @@
-This is Gatherer v<%version%>
-http://gatherer.sf.net/
+This is Gatherer_p2p 1.0.0
+
+Its crucial feature is node synchronization via guild chat.
+
+It is based on:
+* the latest 1.12.1 compatible build of the "Gatherer" addon, I've found:
+  http://gathereraddon.com/dl/Gatherer/gatherer-2.99.0.0284.zip
+* patch of the addon with node broadcasting on gathering:
+  https://github.com/jsb/Gatherer
+
+Major version is nailed to "1" for the 1.12.1 client compatible versions.
+In other ways versioning complies with semver.
+
+The text below is from the parent addon readme.
+http://gathereraddon.com
 
 ABOUT:
 --------------
@@ -22,6 +35,67 @@ If you want to configure the addon, click the Gatherer configuration icon floati
 
 CHANGELOG (- done, = to test, + todo):
 ----------
+2.99.2
+GathererUI - bug fix and ruRU localization
+
+2.2.3.1:
+========
+
+# Bug Fix:
+- forced overlay frame identifier to integer values when computing these dynamically for world map buttons
+- forced UI options that were meant to be saved as numbers to number in default and changed values.
+- alternate recording method using tooltips added to workaround 1.12 Blizzard bug not displaying chatline for gathering.
+
+# Changes:
+- removed world map buttons, these are now generated dynamically.
+
+# Localization:
+- french change from "Dark Iron" to "sombrefer" added to list for fixed items (run zone match with fix item checked to apply)
+
+2.2.3:
+======
+# Bug Fix:
+- Fixed some checkboxes positions and edit boxes size in the Globals tabs
+- Fixed default icon for worldmap notes to prevent spam in FrameXML.log
+- Fixed Event processing not to occur while zoning.
+- Addon init, use a string forced to lower case to get addons name (which match the folder/toc name, while windows is not case sensitive, the WoW client is) to have initialisation occur even if the folder is misnamed on hard drive.
+- Removed forced delay when handling world map overlays.
+- Quick fix for fishing to prevent recording on some silithus mobs.
+
+# Changes:
+- drop down menus reworked (and sorted alphabetically)
+- some code optimisation
+
+# Item:
+- French localisation: fixed Sauge-argent and added name transition to list of fixed names.
+- felwood plants added.
+
+2.2.2:
+======
+# Bug Fix:
+- Tooltips usage should be fixed (ie. no error if you don't have the proper tooltip)
+- German localisation: added bloodpetal to list of fixed names, new transition matrix for 1.10.
+
+# New:
+- Added records for Fishing in nodes: works slightly differently from usual recording.
+  * First recording method, uses Trunks and Bloated fish to automatically record where you stand (type assigned to Floating wreck, even though it's not always true).
+  * Second record method, uses the node tooltip, in order to do that, you must autoloot (shift click the bobber) AND move slightly the cursor to make the node tooltip appear.
+  Fishing categories are: School (all type of school node), Floating Wreckage (include Oil Spill) and Elemental water.
+
+2.2.1:
+======
+# Bug Fix:
+- Arthas tear format forced on gathering (zone match, identical source and destination with item fix checkbox selected needed).
+- Fix for french Pi�ge � langouste and pousse de p�tale-de-sang (zone match, identical source and destination with item fix checkbox selected needed).
+- chinese UI localization updated.
+- Scrollbars graphic fixed.
+- scaling for icon fade under min distance added
+- fix name for old Firebloom name included in german item name fix list.
+- default value for max distance is now 20 instead of infinite, search limited to current zone.
+
+# New:
+- Added iconshade theme, icons are displayed all the time, but shade under min icon distance (40% by
+  default if shade under min distance is set at 100).
 
 2.2.0:
 ======
@@ -84,7 +158,7 @@ CHANGELOG (- done, = to test, + todo):
 # New:
 - report by zone (new UI, access through command line, binding, button on config dialog, button in quickmenu).
 - search utility (new UI, access through command line, binding, button on config dialog, button in quickmenu).
-- Ingame edit utility for nodes (delete, toggle bugged, change icon, type, gather name) with selectable scope at node, zone, continent or world level for propagation of the change, alt right click on a node on the world map to display the dialog. 
+- Ingame edit utility for nodes (delete, toggle bugged, change icon, type, gather name) with selectable scope at node, zone, continent or world level for propagation of the change, alt right click on a node on the world map to display the dialog.
 - added world map icon alpha setting selector in config dialog.
 - added option to have an alpha value for mininotes under the minimum icon distance (100% by default).
 - added binding for option, report, search dialogs.
@@ -134,7 +208,7 @@ CHANGELOG (- done, = to test, + todo):
 
 * Items
 - New Items:
-  - Un'Goro Power Crystals 
+  - Un'Goro Power Crystals
   - Un'Goro Soil
   - BloodPetal Sprouts
   - Blood of Heroes
@@ -146,7 +220,7 @@ CHANGELOG (- done, = to test, + todo):
 - New interface function (Gatherer_AddGather , see Gatherer.lua for parameters) for external addons to add record things in the Gatherer database.
 
 * World Map
-- World Map now has a show/hide button for items (lower left corner), It is off by default and will reset to that whenever you change zone (or miniregion), if the display is off, the delay/freeze while displaying items on the world map won't happen (if any) until you click to show the items. 
+- World Map now has a show/hide button for items (lower left corner), It is off by default and will reset to that whenever you change zone (or miniregion), if the display is off, the delay/freeze while displaying items on the world map won't happen (if any) until you click to show the items.
 - Filters are now accessible from the world map (note that changing the on/off/auto setting from the world map will bring you back to your character's current zone map). This is off by default, to enable it, check the button in the configuration dialog.
 - Interface to delete/flag node as bugged (accessible through alt-right clicking on an item, which used to delete it right away), these buttons appear on the lower right of the world map frame when available.
 
@@ -289,4 +363,4 @@ Deleted a rogue print2 statement.
 - Added giant clam treasure
 
 --------------
-Revision: $Id: Readme.txt,v 1.15 2006/01/04 11:55:00 islorgris Exp $
+Revision: $Id: Readme.txt 277 2006-08-27 09:30:13Z islorgris $

@@ -1,17 +1,16 @@
 --[[
 	Localization stings for Gatherer config UI
 	english set by default, localized versions overwrite the variables.
-	Version: <%version%>
-	Revision: $Id: UI_localization.lua,v 1.16 2006/01/04 11:55:37 islorgris Exp $
-	
+	Revision: $Id: UI_localization.lua 284 2006-09-14 22:56:01Z esamynn $
+
 	ToDo:
 		- Missing German strings
-		- Missing Chinese strings	
+		- Missing Chinese strings
 ]]
 
 	-- Quick Menu
 	GATHERER_TEXT_TITLE_BUTTON		= "Gatherer Options";
-	
+
 	GATHERER_TEXT_TOGGLE_MINIMAP	= "Minimap ";
 	GATHERER_TEXT_TOGGLE_MAINMAP	= "Worldmap ";
 	GATHERER_TEXT_TOGGLE_HERBS   	= "Herbs ";
@@ -71,7 +70,7 @@
 	GATHERER_MAPMINDER_TIP			= "Activate/Deactivate Map Minder.";
 	GATHERER_TEXT_MAPMINDER_TIP		= "Adjusts the Map Minder timer.";
 	GATHERER_THEME_TIP				= "Set Icon Theme.";
-	GATHERER_NOMINIICONDIST_TIP		= "No display of minimap icon under min distance.";	
+	GATHERER_NOMINIICONDIST_TIP		= "No display of minimap icon under min distance.";
 	GATHERER_RAREORE_TIP			= "Show common/rare ore/herbs together.";
 	GATHERER_TEXT_FADEPERC_TIP		= "Adjusts icons fade percent." ;
 	GATHERER_TEXT_FADEDIST_TIP		= "Adjusts icons fade distance.";
@@ -83,9 +82,9 @@
 	GATHERER_WMICONSIZEEB_TIP		= "Set Icon size on world map.";
 	GATHERER_WMICONALPHAEB_TIP		= "Set Icon transparency on world map.";
 	GATHERER_TEXT_ALPHAUNDER_MINICON_TIP = "Set mininote transparency under minimal distance";
-	
+
 	GATHERER_TAB_GLOBALS_TEXT_TIP	= "Access Global Options.";
-	
+
 	-- Filters Options
 	GATHERER_TAB_FILTERS_TEXT 		= "Filters";
 
@@ -124,18 +123,18 @@
 
 	-- Report Dialog
 	GATHERER_TAB_REPORT_TIP			= "Node Report by Zone.";
-	
+
 	GATHERER_REPORT_LOCATION		= "Location:";
 	GATHERER_REPORT_COL_TYPE		= "Type";
 	GATHERER_REPORT_COL_NAME		= "Gatherable";
 	GATHERER_REPORT_COL_PTYPE		= "% Type";
 	GATHERER_REPORT_COL_PDENSITY	= "% Density";
-	
+
 	GATHERER_REPORT_SUMMARY			= "Total: # gather for & nodes";
 
 	-- Search Dialog
 	GATHERER_TAB_SEARCH_TIP			= "Search for Zone containing specific item.";
-	
+
 	GATHERER_SEARCH_LOCATION		= "Item:";
 	GATHERER_SEARCH_COL_CONTINENT	= "Continent";
 	GATHERER_SEARCH_COL_ZONE		= "Zone";
@@ -143,7 +142,7 @@
 	GATHERER_SEARCH_COL_PDENSITY	= "% Density";
 
 	GATHERER_SEARCH_SUMMARY			= "Found: # nodes in & zones";
-	
+
 	-- World Map
 	GATHERER_FILTERDM_TEXT		= "Filters"
 	GATHERER_FILTERDM_TIP		= "Modify item filters."
@@ -171,11 +170,11 @@
 
 	GathererDetails = {}; -- this line MUST NOT be repeated in localization blocks
 	GathererDetails["description"] = "Show gathered herbs/ores/treasures locations";
-	GathererDetails["releaseDate"] = "January 4, 2006";
+	GathererDetails["releaseDate"] = "August 27, 2006";
 
 if ( GetLocale() == "frFR" ) then
 	-- Quick Menu
-	GATHERER_TEXT_TITLE_BUTTON		= "Gatherer Options";	
+	GATHERER_TEXT_TITLE_BUTTON		= "Gatherer Options";
 
 	GATHERER_TEXT_TOGGLE_MINIMAP	= "Carte: Minicarte ";
 	GATHERER_TEXT_TOGGLE_MAINMAP	= "Carte: Monde ";
@@ -189,7 +188,7 @@ if ( GetLocale() == "frFR" ) then
 	GATHERER_SEARCH_TIP				= "Vers la fenetre de recherche.";
 	GATHERER_MENUTITLE_TIP			= "Vers la fenetre de configuration.";
 	GATHERER_ZMBUTTON_TIP			= "Vers la synchronisation de zone.";
-	
+
 	-- Quick Menu Options
 	GATHERER_TEXT_CONFIG_TITLE      = "Gatherer: Options";
 	GATHERER_TAB_MENU_TEXT			= "Menu Rapide"
@@ -241,7 +240,7 @@ if ( GetLocale() == "frFR" ) then
 	GATHERER_TEXT_MAXDIST_TIP		= "Ajuste la distance maximum pour l'affichage des notes sur la minicarte.";
 	GATHERER_MAPMINDER_TIP			= "Activater/D\195\169sactiver Map Minder.";
 	GATHERER_THEME_TIP				= "Choisir le th\195\168me d'icone.";
-	GATHERER_NOMINIICONDIST_TIP		= "Ne pas afficher les mini-icones en dessous de la distance minimale.";	
+	GATHERER_NOMINIICONDIST_TIP		= "Ne pas afficher les mini-icones en dessous de la distance minimale.";
 	GATHERER_RAREORE_TIP			= "Coupler l'affichage des herbes/minerais rares.";
 	GATHERER_TOGGLEWORLDNOTES_TIP	= "Basculer entre les noms courts/longs des objets sur la carte du monde.";
 	GATHERER_WMICONSIZEEB_TIP		= "Choisir la taille des icones sur la carte du monde.";
@@ -289,18 +288,18 @@ if ( GetLocale() == "frFR" ) then
 
 	-- Report Dialog
 	GATHERER_TAB_REPORT_TIP			= "Rapport: points de r\195\169colte par Zone.";
-	
+
 	GATHERER_REPORT_LOCATION		= "Localisation:";
 	GATHERER_REPORT_COL_TYPE		= "Type";
 	GATHERER_REPORT_COL_NAME		= "R\195\169coltable";
 	GATHERER_REPORT_COL_PTYPE		= "% Type";
 	GATHERER_REPORT_COL_PDENSITY	= "% Densit\195\169";
-	
+
 	GATHERER_REPORT_SUMMARY			= "Total: # r\195\169coltes pour & points";
 
 	-- Search Dialog
 	GATHERER_TAB_SEARCH_TIP			= "Cherche les zones contenant un objet sp\195\169cifique.";
-	
+
 	GATHERER_SEARCH_LOCATION		= "Objet:";
 	GATHERER_SEARCH_COL_CONTINENT	= "Continent";
 	GATHERER_SEARCH_COL_ZONE		= "Zone";
@@ -308,7 +307,7 @@ if ( GetLocale() == "frFR" ) then
 	GATHERER_SEARCH_COL_PDENSITY	= "% Densit\195\169";
 
 	GATHERER_SEARCH_SUMMARY			= "Trouv\195\169s: # points dans & zones";
-	
+
 	-- World Map
 	GATHERER_FILTERDM_TEXT		= "Filtres"
 	GATHERER_FILTERDM_TIP		= "Modifie les filtres d'objets."
@@ -328,14 +327,180 @@ if ( GetLocale() == "frFR" ) then
 	GathererHelp[3] ="|cffff7f3fMinicarte:|r\n\nLa minicarte affiche des icones pour les r\195\169coltables proches (25 max, selon les filtres, nombre \195\160 montrer, distance maxi \195\160 considerer, etc.).\n\nEn passant la souris dessus une fen\195\170tre est affich\195\169e et donne le nom de l'objet, le nombre de r\195\169coltes effectu\195\169es dessus et sa distance depuis la position actuelle du personnage (en unit\195\169s et temps pour se rendre au point en ligne droite \195\160 vitesse de course normale).\n";
 	GathererHelp[4] ="|cffff7f3fCarte du Monde:|r\n\nLa carte du monde affiche les icones de tout ce qui a \195\169t\195\169 r\195\169colt\195\169 dans la zone s\195\169lectionn\195\169e (400 max, selon les filtres choisis, etc.).\n\nUn grand nombre d'objet \195\160 afficher pouvant causer un d\195\169lai de l'affichage de la carte, par d\195\169faut les objets sont montr\195\169s (il y a une bascule dans l'onglet Filtres des options qui permet de ne pas les afficher en permanence, cela active un bouton Show Item sur la carte du monde).\n\nLa Carte du Monde permet aussi l'acc\195\169s \195\160 l'\195\169diteur de point pour effectuer des manipulations basiques sur la base de donn\195\169es, en faisant alt-clic droit sur un point.\n";
 	GathererHelp[5] ="|cffff7f3fOptions:|r\n\nLa fen\195\170tre d'options est divis\195\169e en 3 onglets: Filtres, G\195\169n\195\169ral et Menu Rapide.\n\n|cffff7f3fOnglet Filtres|r options relatives aux filtres (y compris le contr\195\180le pour le bouton Show/Hide sur la carte du monde).\n\n|cffff7f3fOnglet G\195\169n\195\169ral|r options relatives aux fonctionnalit\195\169s de base de Gatherer (la pluspart \195\169tant aussi disponibles par ligne de commande).\n\n|cffff7f3fOnglet Menu rapide|r contr\195\180le le comportement du menu rapide du bouton de la minicarte (y compris la position et l'affichage/non-affichage de l'icone).\n";
-	GathererHelp[6] ="|cffff7f3fZone Match:|r\n\nCeci est principale pr\195\169vu pour les clients WoW localis\195\169s dans lesquels les traductions de nom de zones n'\195\169taient pas finis lors de la release officielle de WoW.\n\nQuand les noms de zone sont chang\195\169s, les index changent car elles sont tri\195\169es alphab\195\169tiquement.\nCet utilitaire fournit des matrices de transition pour les corriger en choisissant un ordre Source (ie. le pr\195\169c\195\169dent) et un ordre Destination (ie. l'actuel) identifi\195\169 par la version de WoW et prefix\195\169 par la langue du client (la case correction d'objet permet de corriger les noms d'objets traduits au fil de l'eau).\n\nCeci permet aussi de faire des manipulations globales sur la base, comme changer son format. Cela est fait avec d\195\168s qu'une transition est appliqu\195\169e, les clients non-localis\195\169s doivent utiliser des matrices d'identit\195\169 (ie. m\195\170me source et destination).\n\n|cffff7f3fLa base est modifi\195\169e, donc gardez une sauvegarde de celle-ci, au cas ou.|r\n";
+	GathererHelp[6] ="|cffff7f3fZone Match:|r\n\nCeci est principalement pr\195\169vu pour les clients WoW localis\195\169s dans lesquels les traductions de nom de zones n'\195\169taient pas finis lors de la release officielle de WoW.\n\nQuand les noms de zone sont chang\195\169s, les index changent car elles sont tri\195\169es alphab\195\169tiquement.\nCet utilitaire fournit des matrices de transition pour les corriger en choisissant un ordre Source (ie. le pr\195\169c\195\169dent) et un ordre Destination (ie. l'actuel) identifi\195\169 par la version de WoW et prefix\195\169 par la langue du client (la case correction d'objet permet de corriger les noms d'objets traduits au fil de l'eau).\n\nCeci permet aussi de faire des manipulations globales sur la base, comme changer son format. Cela est fait avec d\195\168s qu'une transition est appliqu\195\169e, les clients non-localis\195\169s doivent utiliser des matrices d'identit\195\169 (ie. m\195\170me source et destination).\n\n|cffff7f3fLa base est modifi\195\169e, donc gardez une sauvegarde de celle-ci, au cas ou.|r\n";
 	GathererHelp[7] ="|cffff7f3fRapport:|r\n\nCette fen\195\170tre permet d'afficher les objets r\195\169colt\195\169s dans les diff\195\169rentes zones (une \195\160 la fois) pour avoir une vue d'ensemble rapide.\n\nVous pouvez cliquer sur les titres des colonnes pour trier (et tri inverse) l'affichage selon le contenu de la colonne choisie.\n\nLa pluspart des colonnes sont facilement compr\195\169hensibles, except\195\169 les 2 d\195\169taill\195\169es ci-apr\195\168s:\n|cffff7f3fType %:|r\n  Pourcentage de resource par rapport au nombre de r\195\169colte du m\195\170me type dans la zone.\n\n|cffff7f3fDensit\195\169 %:|r\n  Pourcentage de ressource par rapport au nombre total de r\195\169colte de l'objet dans le monde.\n";
 	GathererHelp[8] ="|cffff7f3fRecherche:|r\n\nDans cette fen\195\170tre vous pouvez rechercher un objet particulier et afficher les zones dans lesquelles vous l'avez d\195\169j\195\160 r\195\169colt\195\169.\n\nVous pouvez cliquer sur les titres des colonnes pour trier (et tri inverse) l'affichage selon le contenu de la colonne choisie.\n\nLa pluspart des colonnes sont facilement compr\195\169hensibles, except\195\169 les 2 d\195\169taill\195\169es ci-apr\195\168s:\n|cffff7f3f% points:|r\n  Pourcentage de ressource par rapport au nombre de points de r\195\169colte de la zone.\n\n|cffff7f3f% Densit\195\169:|r\n  Pourcentage de ressource par rapport au nombre total de point de r\195\169colte correspondant dans le monde.\n";
 	GathererHelp[9] ="|cffff7f3fEditeur de point:|r\n\nCeci permet (alt-clic droit sur un point de r\195\169colte sur la Carte du Monde) de changer le nom du point, son icone, le marquer comme bugg\195\169 ou de l'effacer.\n\n|cffff7f3fToggle Bugged|r ne fonctionne que pour le point courant.\n\n|cffff7f3fSuppr|r utilise la port\195\169e (Node par d\195\169faut pour reduire les erreurs) et peut \195\170tre \195\169tendu \195\160 Zone, Continent et World.\n\n|cffff7f3fAccepter|r prend en compte le nouveau nom (appuyer sur entr\195\169e pour le valider apr\195\169s l'avoir tap\195\169) et/ou la nouvelle icone du point.\nComme pour le bouton Suppr, la port\195\169e est prise en compte peut \195\170tre appliqu\195\169e aux niveaux Node, Zone, Continent et World.\n";
 
 	GathererDetails["description"] = "Montrer les positions des herbes/minerais/tr\195\169sors r\195\169colt\195\169s.";
-	GathererDetails["releaseDate"] = "4 Janvier 2006";
+	GathererDetails["releaseDate"] = "27 aout 2006";
 
+end
+
+if GetLocale() == "ruRU" then
+-- Version : Russian ( by Maus ) edit by CFM
+	-- Quick Menu
+	GATHERER_TEXT_TITLE_BUTTON		= "Настройки Gatherer";
+
+	GATHERER_TEXT_TOGGLE_MINIMAP	= "Мини-карта ";
+	GATHERER_TEXT_TOGGLE_MAINMAP	= "Карта мира ";
+	GATHERER_TEXT_TOGGLE_HERBS   	= "Растения ";
+	GATHERER_TEXT_TOGGLE_MINERALS	= "Руда ";
+	GATHERER_TEXT_TOGGLE_TREASURE	= "Сундуки и рыба ";
+	GATHERER_TEXT_TOGGLE_REPORT     = "Статистика";
+	GATHERER_TEXT_TOGGLE_SEARCH		= "Поиск";
+
+	GATHERER_REPORT_TIP				= "Доступ к диалогу статистики.";
+	GATHERER_SEARCH_TIP				= "Доступ к диалогу поиска.";
+	GATHERER_MENUTITLE_TIP			= "Доступ к диалогу настроек.";
+	GATHERER_ZMBUTTON_TIP			= "Доступ к диалогу наилучшей зоны.";
+
+	-- Quick Menu Options
+	GATHERER_TEXT_CONFIG_TITLE      = "Gatherer: Настройки";
+	GATHERER_TAB_MENU_TEXT			= "Кнопка меню";
+
+	GATHERER_TEXT_SHOWONMOUSE       = "Показывать по мышке";
+	GATHERER_TEXT_HIDEONMOUSE       = "Скрывать по мышке";
+	GATHERER_TEXT_SHOWONCLICK       = "Показывать по ЛКМ";
+	GATHERER_TEXT_HIDEONCLICK       = "Скрывать по ЛКМ";
+	GATHERER_TEXT_HIDEONBUTTON      = "Скрывать по нажатию кнопки";
+	GATHERER_TEXT_POSITION          = "Позиция";
+	GATHERER_TEXT_RADIUS	        = "Радиус";
+	GATHERER_TEXT_HIDEICON			= "Скрыть значок меню";
+
+	GATHERER_SHOWONMOUSE_TIP		= "Отображать меню при наведении курсора на кнопку Gatherer.";
+	GATHERER_SHOWONCLICK_TIP		= "Отображать меню по ЛКМ.";
+	GATHERER_HIDEONMOUSE_TIP		= "Скрывать меню курсором мыши.";
+	GATHERER_HIDEONCLICK_TIP		= "Скрывать меню по ЛКМ.";
+	GATHERER_HIDEONBUTTON_TIP		= "Скрывать меню после выбора";
+	GATHERER_HIDEICON_TIP			= "Скрыть кнопку Gatherer на мини-карте.";
+	GATHERER_TEXT_POSITION_TIP  	= "Изменить позицию кнопку приложения относительно рамки.";
+	GATHERER_TEXT_RADIUS_TIP  		= "Изменить положение кнопки приложения относительно центра.";
+
+	GATHERER_TAB_MENU_TEXT_TIP		= "Доступ к настройкам быстрого меню.";
+
+	-- Globals Options
+	GATHERER_TAB_GLOBALS_TEXT		= "Общие";
+
+	GATHERER_TEXT_RAREORE           = "Связывать редкие Руда/Травы";
+	GATHERER_TEXT_NO_MINICONDIST	= "Убирать значок у мин. дистанции";
+	GATHERER_TEXT_MAPMINDER			= "Активировать Map Minder";
+	GATHERER_TEXT_MAPMINDER_VALUE	= "Map Minder таймер";
+	GATHERER_TEXT_FADEPERC			= "Процент затухания";
+	GATHERER_TEXT_FADEDIST			= "Расстояние затухания";
+	GATHERER_TEXT_THEME				= "Тема: ";
+	GATHERER_TEXT_MINIIDIST			= "Минимальное расстояние значка";
+	GATHERER_TEXT_NUMBER			= "Число мини-заметок";
+	GATHERER_TEXT_MAXDIST			= "Дистанция мини-заметок";
+	GATHERER_TEXT_HIDEMININOTES		= "Скрыть мини-заметки";
+	GATHERER_TEXT_TOGGLEWORLDNOTES	= "Длина символов в названии заметок";
+	GATHERER_TEXT_WMICONSIZEEB		= "Размер значка на карте мира";
+	GATHERER_TEXT_WMICONALPHAEB		= "Прозрачность значка";
+	GATHERER_TEXT_ALPHAUNDER_MINICON= "Мин. прозрачность";
+
+	GATHERER_MAPMINDER_TIP			= "Вкл/Выкл Map Minder.";
+	GATHERER_TEXT_MAPMINDER_TIP		= "Регулировать таймер Map Minder.";
+	GATHERER_THEME_TIP				= "Выставить тему иконки.";
+	GATHERER_NOMINIICONDIST_TIP		= "Не отображать иконки у мини-карты, когда дистанция до них близка.";
+	GATHERER_RAREORE_TIP			= "Показывать редкую руду/травы вместе.";
+	GATHERER_TEXT_FADEPERC_TIP		= "Регулировать процент исчезновения иконок." ;
+	GATHERER_TEXT_FADEDIST_TIP		= "Регулировать расстояние исчезновения иконок.";
+	GATHERER_TEXT_MINIIDIST_TIP		= "Регулировка минимального расстояния для появления иконки.";
+	GATHERER_TEXT_NUMBER_TIP		= "Регулировка кол-ва отображаемых мини-записей на мини-карте.";
+	GATHERER_TEXT_MAXDIST_TIP		= "Регулировка максимального расстояния, для того чтобы увидеть отображаемые мини-записи на мини-карте.";
+	GATHERER_HIDEMININOTES_TIP		= "Не показывать мини-записи на мини-карте.";
+	GATHERER_TOGGLEWORLDNOTES_TIP	= "Переключение между короткими и длинными заметками на карте мира.";
+	GATHERER_WMICONSIZEEB_TIP		= "Выставить размер иконки на карте мира.";
+	GATHERER_WMICONALPHAEB_TIP		= "Выставить прозрачность иконки на карте мира.";
+	GATHERER_TEXT_ALPHAUNDER_MINICON_TIP = "Выставить прозрачность мини-записей при минимальном расстоянии.";
+
+	GATHERER_TAB_GLOBALS_TEXT_TIP	= "Доступ к глобальным параметрам.";
+
+	-- Filters Options
+	GATHERER_TAB_FILTERS_TEXT 		= "Фильтры";
+
+	GATHERER_TEXT_FILTER_HERBS		= "Травы: ";
+	GATHERER_TEXT_FILTER_ORE		= "Руда: ";
+	GATHERER_TEXT_FILTER_TREASURE	= "Сундуки: ";
+	GATHERER_TEXT_LINKRECORD        = "Добавить фильтр"
+	GATHERER_TEXT_WMFILTERS			= "Фильтры на карте мира";
+	GATHERER_TEXT_DISABLEWMFIX		= "Кнопка \"Показать\\Скрыть\"";
+
+	GATHERER_HERBSKLEB_TIP			= "Установить минимальный навык для отображения травничества.";
+	GATHERER_ORESKLEB_TIP			= "Установить минимальный навык для отображения горного дела.";
+	GATHERER_HERBDDM_TIP			= "Фильтр отображения трав.";
+	GATHERER_OREDDM_TIP				= "Фильтр отображения руды.";
+	GATHERER_TREASUREDDM_TIP		= "Фильтр отображения сокровища.";
+	GATHERER_TEXT_LINKRECORD_TIP	= "Ссылка записи на выбранный фильтр.";
+	GATHERER_TEXT_WMFILTERS_TIP		= "Переключение элементов фильтра на карте мира.";
+	GATHERER_TEXT_DISABLEWMFIX_TIP	= "Вкл/Выкл отображение предметов на карте мира";
+
+	GATHERER_TAB_FILTERS_TEXT_TIP	= "Доступ к параметрам фильтра."
+
+	-- Zone Rematch Dialog
+	GATHERER_TEXT_REMATCH_TITLE		= "Исправление зон";
+
+	GATHERER_TEXT_APPLY_REMATCH		= "Применить исправление зон:";
+	GATHERER_TEXT_SRCZONE_MISSING	= "Не выбрана исходная зона.";
+	GATHERER_TEXT_DESTZONE_MISSING	= "Назначенная зона не выбрана.";
+	GATHERER_TEXT_FIXITEMS			= "Исправить имя предмета";
+	GATHERER_TEXT_LASTMATCH			= "Последний предмет: ";
+	GATHERER_TEXT_LASTMATCH_NONE	= "Нет";
+	GATHERER_TEXT_CONFIRM_REMATCH	= "Подтвердить исправление зон (ВНИМАНИЕ, данные будут изменены)";
+
+	GATHERER_ZM_FIXITEM_TIP			= "Исправит имя предмета, только локализованную версию.";
+	GATHERER_ZM_SRCDDM_TIP			= "Установить источник порядка карты.";
+	GATHERER_ZM_DESTDDM_TIP			= "Установить назначение порядка карты.";
+
+	-- Report Dialog
+	GATHERER_TAB_REPORT_TIP			= "Отчет объектов по зоне.";
+
+	GATHERER_REPORT_LOCATION		= "Местонахождения:";
+	GATHERER_REPORT_COL_TYPE		= "Тип";
+	GATHERER_REPORT_COL_NAME		= "Собрано";
+	GATHERER_REPORT_COL_PTYPE		= "% Типа";
+	GATHERER_REPORT_COL_PDENSITY	= "% Кол-ва";
+
+	GATHERER_REPORT_SUMMARY			= "Всего: # собрано с & объектов";
+
+	-- Search Dialog
+	GATHERER_TAB_SEARCH_TIP			= "Поиск определенных предметов по локации.";
+
+	GATHERER_SEARCH_LOCATION		= "Предмет:";
+	GATHERER_SEARCH_COL_CONTINENT	= "Континент";
+	GATHERER_SEARCH_COL_ZONE		= "Зона";
+	GATHERER_SEARCH_COL_PNODE		= "% Объект";
+	GATHERER_SEARCH_COL_PDENSITY	= "% Кол-во";
+
+	GATHERER_SEARCH_SUMMARY			= "Найдено: # объектов в & зонах";
+
+	-- World Map
+	GATHERER_FILTERDM_TEXT		= "Фильтр"
+	GATHERER_FILTERDM_TIP		= "Поиск предметов."
+
+	-- Bindings
+	BINDING_HEADER_GATHERER_BINDINGS_HEADER		= "Gatherer";
+
+	BINDING_NAME_GATHERER_BINDING_QUICKMENU		= "Показать/Скрыть Быстрое Меню";
+	BINDING_NAME_GATHERER_BINDING_OPTIONS		= "Показать/Скрыть Опции";
+	BINDING_NAME_GATHERER_BINDING_REPORT		= "Показать/Скрыть Отчет";
+	BINDING_NAME_GATHERER_BINDING_SEARCH		= "Показать/Скрыть Параметры";
+
+	-- MyAddons Help Pages
+	GathererHelp = {};
+	GathererHelp[1] ="|cffff7f3fСодержание|r\n\n1- Быстрое меню\n2- Мини-карта\n3- Карта мира\n4- Диалог опций\n5- Диалог отчета\n6- Диалог поиска\n7- Редактор объектов\n";
+	GathererHelp[2] ="|cffff7f3fБыстрое меню:|r\n\nБыстрый доступ к основным фильтрам (мини-карта, карта мира, травы, руда и сокровища), а так же доступ к статичным диалогам.\n";
+	GathererHelp[3] ="|cffff7f3fМини-карта:|r\n\nОтображение ближайших собранных объектов на мини-карте (максимум 25, в зависимости от настроек).\n";
+	GathererHelp[4] ="|cffff7f3fКарта мира:|r\n\nОтображение собранных объектов на карте мира (максимум 400 объектов, в зависимости от настроек).\n\nТак же, на карте мира возможен доступ к редактору объекта, нажав Alt+ПКМ на выбранном объекте.\n";
+	GathererHelp[5] ="|cffff7f3fДиалог опций:|r\n\nВ диалоге опций, вы можете редактировать отображение объектов, скрывать/показывать, их масштаб и многое другое.\n";
+	GathererHelp[6] ="|cffff7f3fДиалог отчета:|r\n\nВ этом диалоге, вы можете отобразить для быстрого просмотра уже собранные объекты, в различных зонах. Так же вы можете отсортировать их.\n";
+	GathererHelp[7] ="|cffff7f3fДиалог поиска:|r\n\nВ этом диалоге, вы можете указать необходимый вам объект и просмотреть в каких зонах вы уже его собирали.\n";
+	GathererHelp[8] ="|cffff7f3fРедактор объектов:|r\n\nВ этом диалоге вы можете редактировать объект, нажав на нем Alt+ПКМ. Вы можете изменить имя объекта, его иконку и много другое.\n";
+	GathererHelp.currentPage=1;
+
+	GathererDetails = {}; -- this line MUST NOT be repeated in localization blocks
+	GathererDetails["description"] = "Показать места собранных трав/руды/сокровищ ";
+	GathererDetails["releaseDate"] = "Август 27, 2006";
 end
 
 if ( GetLocale() == "deDE" ) then
@@ -352,8 +517,8 @@ if ( GetLocale() == "deDE" ) then
 
 	-- GATHERER_REPORT_TIP			= "";
 	-- GATHERER_SEARCH_TIP			= "";
-	GATHERER_MENUTITLE_TIP			= "Zugriff auf Konfigurationen";  
-	GATHERER_ZMBUTTON_TIP			= "Zugriff auf Zone Match Dialog";  
+	GATHERER_MENUTITLE_TIP			= "Zugriff auf Konfigurationen";
+	GATHERER_ZMBUTTON_TIP			= "Zugriff auf Zone Match Dialog";
 
 	-- Quick Menu Options
 	GATHERER_TEXT_CONFIG_TITLE	= "Gatherer: Optionen";
@@ -365,14 +530,14 @@ if ( GetLocale() == "deDE" ) then
 	GATHERER_TEXT_HIDEONCLICK	= "Verstecken bei Linksklick";
 	GATHERER_TEXT_HIDEONBUTTON	= "Verstecken bei Tastendruck";
 	GATHERER_TEXT_POSITION		= "Position";
-	GATHERER_TEXT_HIDEICON		= "Verstecke Menuicon";  
+	GATHERER_TEXT_HIDEICON		= "Verstecke Menuicon";
 
-	GATHERER_SHOWONMOUSE_TIP	= "Zeige das Menu beim Mausover \195\188ber das Icon";  
-	GATHERER_SHOWONCLICK_TIP	= "Zeige das Menu beim Linksklick auf das Icon";  
-	GATHERER_HIDEONMOUSE_TIP	= "Verstecke das Menu wenn der Mauszeiger nicht mehr auf dem Icon ist";  
-	GATHERER_HIDEONCLICK_TIP	= "Verstecke das Menu beim Linksklick auf das Icon";  
-	GATHERER_HIDEONBUTTON_TIP	= "Verstecke das Menu bei Anwahl";  
-	GATHERER_HIDEICON_TIP		= "Verstecke das Minimapicon zum Menuzugriff";  
+	GATHERER_SHOWONMOUSE_TIP	= "Zeige das Menu beim Mausover \195\188ber das Icon";
+	GATHERER_SHOWONCLICK_TIP	= "Zeige das Menu beim Linksklick auf das Icon";
+	GATHERER_HIDEONMOUSE_TIP	= "Verstecke das Menu wenn der Mauszeiger nicht mehr auf dem Icon ist";
+	GATHERER_HIDEONCLICK_TIP	= "Verstecke das Menu beim Linksklick auf das Icon";
+	GATHERER_HIDEONBUTTON_TIP	= "Verstecke das Menu bei Anwahl";
+	GATHERER_HIDEICON_TIP		= "Verstecke das Minimapicon zum Menuzugriff";
 	GATHERER_TEXT_POSITION_TIP	= "Passt die Position des Trackingicons am Rand der Minikarte an";
 
 	--GATHERER_TAB_MENU_TEXT_TIP	= "";
@@ -390,25 +555,25 @@ if ( GetLocale() == "deDE" ) then
 	GATHERER_TEXT_MINIIDIST			= "Minimale Icon-Entfernung";
 	GATHERER_TEXT_NUMBER			= "Mininotiz-Anzahl";
 	GATHERER_TEXT_MAXDIST			= "Mininotiz-Entfernung";
-	GATHERER_TEXT_HIDEMININOTES		= "Verstecke Minimarkierungen";  
-	GATHERER_TEXT_TOGGLEWORLDNOTES	= "Lange Weltmarkierungsnamen";  
-	GATHERER_TEXT_WMICONSIZEEB		= "Weltkarten Icongr\195\182\195\159e"; 
+	GATHERER_TEXT_HIDEMININOTES		= "Verstecke Minimarkierungen";
+	GATHERER_TEXT_TOGGLEWORLDNOTES	= "Lange Weltmarkierungsnamen";
+	GATHERER_TEXT_WMICONSIZEEB		= "Weltkarten Icongr\195\182\195\159e";
 	-- GATHERER_TEXT_WMICONALPHAEB		= "";
 	--GATHERER_TEXT_ALPHAUNDER_MINICON= "";
 
 	GATHERER_TEXT_MAPMINDER_TIP		= "Stellt den Map-Minder-Timer ein";
-	GATHERER_MAPMINDER_TIP			= "Aktiviere/Deaktiviere Map Minder";  
-	GATHERER_THEME_TIP				= "Setze Icon Theme";  
-	GATHERER_NOMINIICONDIST_TIP		= "Keine Anzeige der Minimap-Icons unter der Mindestentfernung";  
-	GATHERER_RAREORE_TIP			= "Zeige gew\195\182hnliche/seltene Erze/Pflanzen zusammen";  
+	GATHERER_MAPMINDER_TIP			= "Aktiviere/Deaktiviere Map Minder";
+	GATHERER_THEME_TIP				= "Setze Icon Theme";
+	GATHERER_NOMINIICONDIST_TIP		= "Keine Anzeige der Minimap-Icons unter der Mindestentfernung";
+	GATHERER_RAREORE_TIP			= "Zeige gew\195\182hnliche/seltene Erze/Pflanzen zusammen";
 	GATHERER_TEXT_FADEPERC_TIP		= "Stellt die Transparenz in Prozent ein" ;
 	GATHERER_TEXT_FADEDIST_TIP		= "Stellt die Entfernung f\195\188r die Ausblendung ein";
 	GATHERER_TEXT_MINIIDIST_TIP		= "Stellt die minimale Entfernung der Icons ein in welcher sie erscheinen";
 	GATHERER_TEXT_NUMBER_TIP		= "Stellt die Anzahl der angezeigten Mininotizen ein";
 	GATHERER_TEXT_MAXDIST_TIP		= "Stellt die maximale Entfernung ein, in welcher nach Mininotizen gesucht wird";
-	GATHERER_HIDEMININOTES_TIP		= "Zeige keine Minimapsymbole an";  
-	GATHERER_TOGGLEWORLDNOTES_TIP	= "Wechsel zwischen kurzen/langen Itemnamen der Weltkartenmarkierungen";  
-	GATHERER_WMICONSIZEEB_TIP		= "Setze Icongr\195\182\195\159e auf der Weltkarte";  
+	GATHERER_HIDEMININOTES_TIP		= "Zeige keine Minimapsymbole an";
+	GATHERER_TOGGLEWORLDNOTES_TIP	= "Wechsel zwischen kurzen/langen Itemnamen der Weltkartenmarkierungen";
+	GATHERER_WMICONSIZEEB_TIP		= "Setze Icongr\195\182\195\159e auf der Weltkarte";
 	-- GATHERER_TEXT_WMICONALPHAEB_TIP		= "";
 	-- GATHERER_TEXT_ALPHAUNDER_MINICON_TIP = "";
 
@@ -424,10 +589,10 @@ if ( GetLocale() == "deDE" ) then
 	-- GATHERER_TEXT_WMFILTERS		= "";
 	-- GATHERER_TEXT_DISABLEWMFIX	= "";
 
-	GATHERER_HERBSKLEB_TIP			= "Setze min. Kr\195\164uterkundeskill f\195\188r die Anzeige";  
-	GATHERER_ORESKLEB_TIP			= "Set min. Bergbauskill f\195\188r die Anzeige";  
-	GATHERER_HERBDDM_TIP			= "Filter anzuzeigende Pflanzen";  
-	GATHERER_OREDDM_TIP				= "Filter anzuzeigende Erze";  
+	GATHERER_HERBSKLEB_TIP			= "Setze min. Kr\195\164uterkundeskill f\195\188r die Anzeige";
+	GATHERER_ORESKLEB_TIP			= "Set min. Bergbauskill f\195\188r die Anzeige";
+	GATHERER_HERBDDM_TIP			= "Filter anzuzeigende Pflanzen";
+	GATHERER_OREDDM_TIP				= "Filter anzuzeigende Erze";
 	GATHERER_TREASUREDDM_TIP		= "Filter anzuzeigende Truhen";
 	-- GATHERER_TEXT_LINKRECORD_TIP		= "";
 	-- GATHERER_TEXT_WMFILTERS_TIP		= "";
@@ -446,24 +611,24 @@ if ( GetLocale() == "deDE" ) then
 	GATHERER_TEXT_LASTMATCH_NONE	= "Keiner";
 	GATHERER_TEXT_CONFIRM_REMATCH	= "Zonenabgleich best\195\164tigen (ACHTUNG: Daten werden ge\195\164ndert!)";
 
-	GATHERER_ZM_FIXITEM_TIP			= "Korrigiere Itemnamen, nur lokalisierte Version";  
-	GATHERER_ZM_SRCDDM_TIP			= "Setze Source Map Reihenfolge";  
-	GATHERER_ZM_DESTDDM_TIP			= "Setze Destination Map Reihenfolge";  
+	GATHERER_ZM_FIXITEM_TIP			= "Korrigiere Itemnamen, nur lokalisierte Version";
+	GATHERER_ZM_SRCDDM_TIP			= "Setze Source Map Reihenfolge";
+	GATHERER_ZM_DESTDDM_TIP			= "Setze Destination Map Reihenfolge";
 
 	-- Report Dialog
 	-- GATHERER_TAB_REPORT_TIP			= "";
-	
+
 	-- GATHERER_REPORT_LOCATION		= "";
 	-- GATHERER_REPORT_COL_TYPE		= "";
 	-- GATHERER_REPORT_COL_NAME		= "";
 	-- GATHERER_REPORT_COL_PTYPE		= "";
 	-- GATHERER_REPORT_COL_PDENSITY	= "";
-	
+
 	-- GATHERER_REPORT_SUMMARY			= "";
 
 	-- Search Dialog
 	-- GATHERER_TAB_SEARCH_TIP			= "";
-	
+
 	-- GATHERER_SEARCH_LOCATION			= "";
 	-- GATHERER_SEARCH_COL_CONTINENT	= "";
 	-- GATHERER_SEARCH_COL_ZONE			= "";
@@ -471,7 +636,7 @@ if ( GetLocale() == "deDE" ) then
 	-- GATHERER_SEARCH_COL_PDENSITY		= "";
 
 	-- GATHERER_SEARCH_SUMMARY			= "";
-	
+
 	-- World Map
 	--GATHERER_FILTERDM_TEXT		= ""
 	--GATHERER_FILTERDM_TIP		= ""
@@ -485,7 +650,7 @@ if ( GetLocale() == "deDE" ) then
 	-- BINDING_NAME_GATHERER_BINDING_SEARCH		= "";
 end
 
--- localized by biAji 
+-- localized by biAji
 if ( GetLocale() == "zhCN" ) then
 
 	GATHERER_TEXT_TITLE_BUTTON		= "Gatherer\233\128\137\233\161\185";
@@ -495,24 +660,25 @@ if ( GetLocale() == "zhCN" ) then
 	GATHERER_TEXT_TOGGLE_HERBS   	= "\232\141\137\232\141\175";
 	GATHERER_TEXT_TOGGLE_MINERALS	= "\231\159\191\231\137\169";
 	GATHERER_TEXT_TOGGLE_TREASURE	= "\229\174\157\231\174\177";
-    GATHERER_TEXT_TOGGLE_REPORT     = "\230\138\165\229\145\138";
+	GATHERER_TEXT_TOGGLE_REPORT     = "\230\138\165\229\145\138";
 	GATHERER_TEXT_TOGGLE_SEARCH		= "\230\144\156\231\180\162";
 
 	GATHERER_REPORT_TIP				= "\230\137\147\229\188\128\230\138\165\229\145\138\229\175\185\232\175\157\230\161\134";
 	GATHERER_SEARCH_TIP				= "\230\137\147\229\188\128\230\144\156\231\180\162\229\175\185\232\175\157\230\161\134";
 	GATHERER_MENUTITLE_TIP			= "\230\137\147\229\188\128\233\133\141\231\189\174\229\175\185\232\175\157\230\161\134";
 	GATHERER_ZMBUTTON_TIP			= "\230\137\147\229\188\128Zone Match\175\185\232\175\157\230\161\134";
-	
+
 	-- Quick Menu Options
 	GATHERER_TEXT_CONFIG_TITLE      = "Gatherer: \233\128\137\233\161\185";
 	GATHERER_TAB_MENU_TEXT			= "\229\191\171\233\128\159\232\143\156\229\141\149";
-	
+
 	GATHERER_TEXT_SHOWONMOUSE       = "\233\188\160\230\160\135\231\167\187\232\191\135\230\151\182\230\152\190\231\164\186";
 	GATHERER_TEXT_HIDEONMOUSE       = "\233\188\160\230\160\135\231\167\187\229\135\186\230\151\182\233\154\144\232\151\143";
 	GATHERER_TEXT_SHOWONCLICK       = "\229\183\166\233\148\174\231\130\185\229\135\187\230\152\190\231\164\186";
 	GATHERER_TEXT_HIDEONCLICK       = "\229\183\166\233\148\174\231\130\185\229\135\187\233\154\144\232\151\143";
 	GATHERER_TEXT_HIDEONBUTTON      = "\230\140\137\233\148\174\233\154\144\232\151\143";
 	GATHERER_TEXT_POSITION          = "\228\189\141\231\189\174";
+	GATHERER_TEXT_RADIUS	        = "\229\141\138\229\190\132";
 	GATHERER_TEXT_HIDEICON          = "\233\154\144\232\151\143\232\143\156\229\141\149\229\155\190\230\160\135";
 
 	GATHERER_SHOWONMOUSE_TIP		="\233\188\160\230\160\135\231\167\187\232\191\135\229\155\190\230\160\135\230\151\182\230\152\190\231\164\186\232\143\156\229\141\149";
@@ -521,18 +687,19 @@ if ( GetLocale() == "zhCN" ) then
 	GATHERER_HIDEONCLICK_TIP		="\229\183\166\233\148\174\231\130\185\229\135\187\229\155\190\230\160\135\230\151\182\233\154\144\232\151\143\232\143\156\229\141\149";
 	GATHERER_HIDEONBUTTON_TIP		= "\233\128\137\228\184\173\230\151\182\233\154\144\232\151\143\232\143\156\229\141\149\227\128\130";
 	GATHERER_HIDEICON_TIP			= "\233\154\144\232\151\143\232\191\183\228\189\160\229\156\176\229\155\190\230\151\129\231\154\132\229\155\190\230\160\135\227\128\130";
-
 	GATHERER_TEXT_POSITION_TIP      = "\232\176\131\230\149\180\229\155\190\230\160\135\229\156\168\232\191\183\228\189\160\229\156\176\229\155\190\232\190\185\231\188\152\231\154\132\228\189\141\231\189\174";
+	GATHERER_TEXT_RADIUS_TIP  		= "\232\176\131\230\149\180\232\183\159\232\184\170\229\155\190\230\160\135\232\183\157\231\166\187\232\191\183\228\189\160\229\156\176\229\155\190\228\184\173\229\191\131\231\154\132\228\189\141\231\189\174\227\128\130";
 
 	GATHERER_TAB_MENU_TEXT_TIP		= "\229\191\171\233\128\159\232\143\156\229\141\149\233\128\137\233\161\185";
 
 	-- Globals Options
 	GATHERER_TAB_GLOBALS_TEXT		= "\229\133\168\229\177\128\233\128\137\233\161\185";
-	
-	--GATHERER_TEXT_RAREORE           = "";
+
+
+	GATHERER_TEXT_RAREORE           = "\231\168\128\230\156\137\231\159\191\231\137\169\\232\141\137\232\141\175";
 	GATHERER_TEXT_NO_MINICONDIST	= "\230\156\128\229\176\143\232\183\157\231\166\187\229\134\133\228\184\141\230\152\190\231\164\186\229\155\190\230\160\135\227\128\130";
-	--GATHERER_TEXT_MAPMINDER			= "";
-	--GATHERER_TEXT_MAPMINDER_VALUE	= "";
+	GATHERER_TEXT_MAPMINDER			= "\230\191\128\230\180\187\229\156\176\229\155\190\231\155\145\232\167\134";
+	GATHERER_TEXT_MAPMINDER_VALUE	= "\229\156\176\229\155\190\231\155\145\232\167\134\230\151\182\233\151\180";
 	GATHERER_TEXT_FADEPERC			= "\233\128\143\230\152\142\229\186\166";
 	GATHERER_TEXT_FADEDIST			= "\233\128\143\230\152\142\232\183\157\231\166\187";
 	GATHERER_TEXT_THEME				= "\228\184\187\233\162\152\239\188\154";
@@ -540,16 +707,16 @@ if ( GetLocale() == "zhCN" ) then
 	GATHERER_TEXT_NUMBER			= "\232\191\183\228\189\160\230\143\144\231\164\186\230\149\176\233\135\143";
 	--GATHERER_TEXT_MAXDIST			= "";
 	GATHERER_TEXT_HIDEMININOTES		= "\233\154\144\232\151\143\232\191\183\228\189\160\230\143\144\231\164\186";
-	--GATHERER_TEXT_TOGGLEWORLDNOTES	= "";	
+	--GATHERER_TEXT_TOGGLEWORLDNOTES	= "";
 	GATHERER_TEXT_WMICONSIZEEB      = "\228\184\150\231\149\140\229\156\176\229\155\190\229\155\190\230\160\135\229\164\167\229\176\143";
 	GATHERER_TEXT_WMICONALPHAEB		= "\228\184\150\231\149\140\229\156\176\229\155\190\229\155\190\230\160\135\233\128\143\230\152\142\229\186\166";
 	--GATHERER_TEXT_ALPHAUNDER_MINICON= "";
-	
+
 	--GATHERER_MAPMINDER_TIP			= "";
 	--GATHERER_TEXT_MAPMINDER_TIP		= "";
 	GATHERER_THEME_TIP				= "\232\174\190\231\189\174\229\155\190\230\160\135\228\184\187\233\162\152";
 
-	GATHERER_NOMINIICONDIST_TIP		= "\230\156\128\229\176\143\232\183\157\231\166\187\229\134\133\228\186\142\232\191\183\228\189\160\229\156\176\229\155\190\228\184\138\228\184\141\230\152\190\231\164\186\229\155\190\230\160\135\227\128\130";	
+	GATHERER_NOMINIICONDIST_TIP		= "\230\156\128\229\176\143\232\183\157\231\166\187\229\134\133\228\186\142\232\191\183\228\189\160\229\156\176\229\155\190\228\184\138\228\184\141\230\152\190\231\164\186\229\155\190\230\160\135\227\128\130";
 	GATHERER_RAREORE_TIP			= "\229\144\140\230\151\182\230\152\190\231\164\186\230\153\174\233\128\154\47\231\168\128\230\156\137\231\154\132\231\159\191\231\137\169\47\232\141\137\232\141\175\227\128\130";
 	GATHERER_TEXT_FADEPERC_TIP		= "\232\176\131\230\149\180\229\155\190\230\160\135\230\182\136\233\154\144\231\153\190\229\136\134\230\175\148" ;
 	GATHERER_TEXT_FADEDIST_TIP		= "\232\176\131\230\149\180\229\155\190\230\160\135\230\182\136\233\154\144\232\183\157\231\166\187\227\128\130";
@@ -563,9 +730,9 @@ if ( GetLocale() == "zhCN" ) then
 
 	GATHERER_WMICONALPHAEB_TIP		= "\232\174\190\231\189\174\228\184\150\231\149\140\229\156\176\229\155\190\229\155\190\230\160\135\233\128\143\230\152\142\229\186\166";
 	--GATHERER_TEXT_ALPHAUNDER_MINICON_TIP = "";
-	
+
 	GATHERER_TAB_GLOBALS_TEXT_TIP	= "\230\137\147\229\188\128\229\133\168\229\177\128\233\128\137\233\161\185";
-	
+
 	-- Filters Options
 	GATHERER_TAB_FILTERS_TEXT 		= "\232\191\135\230\187\164\230\157\161\228\187\182";
 
@@ -574,8 +741,8 @@ if ( GetLocale() == "zhCN" ) then
 	GATHERER_TEXT_FILTER_TREASURE	= "\229\174\157\231\174\177\239\188\154";
 	GATHERER_TEXT_LINKRECORD        = "\232\191\135\230\187\164\232\174\176\229\189\149"
 	GATHERER_TEXT_WMFILTERS			= "\228\184\150\231\149\140\229\156\176\229\155\190\232\191\135\230\187\164\229\153\168";
-	--GATHERER_TEXT_DISABLEWMFIX		= "\231\166\129\231\148\168\230\152\190\231\164\186\47\233\154\144\232\151\143\230\140\137\233\146\174";
-	
+	GATHERER_TEXT_DISABLEWMFIX		= "\229\144\175\231\148\168\230\152\190\231\164\186\47\233\154\144\232\151\143\230\140\137\233\146\174";
+
 	GATHERER_HERBSKLEB_TIP			= "\232\174\190\231\189\174\230\152\190\231\164\186\233\135\135\233\155\134\232\141\137\232\141\175\233\156\128\232\166\129\231\154\132\230\156\128\228\189\142\230\138\128\232\131\189";
 	GATHERER_ORESKLEB_TIP			= "\232\174\190\231\189\174\230\152\190\231\164\186\233\135\135\231\159\191\233\156\128\232\166\129\231\154\132\230\156\128\228\189\142\230\138\128\232\131\189";
 	GATHERER_HERBDDM_TIP			= "\232\191\135\230\187\164\230\152\190\231\164\186\231\154\132\232\141\137\232\141\175";
@@ -604,18 +771,18 @@ if ( GetLocale() == "zhCN" ) then
 
 	-- Report Dialog
 	GATHERER_TAB_REPORT_TIP			= "\230\140\135\229\174\154\233\161\185\231\155\174\231\154\132\229\156\176\229\140\186\229\136\134\229\184\131\230\138\165\229\145\138\227\128\130";
-	
+
 	GATHERER_REPORT_LOCATION		= "\228\189\141\231\189\174\239\188\154";
 	GATHERER_REPORT_COL_TYPE		= "\231\167\141\231\177\187";
 	GATHERER_REPORT_COL_NAME		= "\229\143\175\233\135\135\233\155\134\231\154\132";
 	GATHERER_REPORT_COL_PTYPE		= "% \231\167\141\231\177\187";
 	GATHERER_REPORT_COL_PDENSITY	= "% \229\175\134\229\186\166";
-	
+
 	GATHERER_REPORT_SUMMARY			= "\229\144\136\232\174\161\239\188\154&\232\138\130\231\130\185\233\135\135\233\155\134#\230\172\161";
 
 	-- Search Dialog
 	GATHERER_TAB_SEARCH_TIP			= "\230\159\165\230\137\190\230\140\135\229\174\154\233\161\185\231\155\174\231\154\132\229\156\176\229\140\186\229\136\134\229\184\131\227\128\130";
-	
+
 	GATHERER_SEARCH_LOCATION		= "\233\161\185\231\155\174\239\188\154";
 	GATHERER_SEARCH_COL_CONTINENT	= "\229\164\167\233\153\134";
 	GATHERER_SEARCH_COL_ZONE		= "\229\156\176\229\140\186";
@@ -624,7 +791,7 @@ if ( GetLocale() == "zhCN" ) then
 	GATHERER_SEARCH_COL_PDENSITY	= "% \229\175\134\229\186\166";
 
 	GATHERER_SEARCH_SUMMARY			= "\229\143\145\231\142\176\239\188\154\229\156\168&\229\156\176\229\140\186\229\143\145\231\142\176#\232\138\130\231\130\185";
-	
+
 	-- World Map
 	GATHERER_FILTERDM_TEXT		= "\232\191\135\230\187\164\229\153\168"
 	GATHERER_FILTERDM_TIP		= "\228\191\174\230\148\185\231\137\169\229\147\129\232\191\135\230\187\164\229\153\168\227\128\130"
@@ -635,7 +802,7 @@ if ( GetLocale() == "zhCN" ) then
 	BINDING_NAME_GATHERER_BINDING_QUICKMENU		= "\230\152\190\231\164\186\47\233\154\144\232\151\143Gatherer\229\191\171\233\128\159\232\143\156\229\141\149";
 	BINDING_NAME_GATHERER_BINDING_OPTIONS		= "\230\152\190\231\164\186\47\233\154\144\232\151\143Gatherer\233\128\137\233\161\185";
 	BINDING_NAME_GATHERER_BINDING_REPORT		= "\230\152\190\231\164\186\47\233\154\144\232\151\143Gatherer\230\138\165\229\145\138";
-	BINDING_NAME_GATHERER_BINDING_SEARCH		= "\230\152\190\231\164\186\47\233\154\144\232\151\143Gatherer\233\128\137\233\161\185";	
+	BINDING_NAME_GATHERER_BINDING_SEARCH		= "\230\152\190\231\164\186\47\233\154\144\232\151\143Gatherer\233\128\137\233\161\185";
 
 	-- MyAddons Help Pages
 	GathererHelp = {};
